@@ -1,37 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
+    <title>Fisheye - photographe </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
   </head>
+
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="./index.html">
+      <img  src="assets/images/logo.png" class="logo" />
+      </a>
     </header>
-    <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-      </div>
+
+    <main id="main" class="main-container">
+      <section class="photograph-display"></section>
+  
+      <div class="mediasort">
+          <h2 class="mediasort__title" aria-label="Trier les médias">Trier par :</h2>
+          <button class="mediasort__btn" id="dropdownBtn" aria-label="Déplier le menu de tri" aria-expanded="false">
+              <i class="fa-solid fa-chevron-down"></i>
+             <i class="fa-solid fa-chevron-up"></i>
+          </button>
+
+          <div class="sort" id="sortMenu">
+            <div class="sort__popularity sort__option" tabindex="0" aria-label="Trier par popularité">Popularité</div>
+            <div class="sort__date sort__option" tabindex="0" aria-label="Trier par date">Date</div>
+            <div class="sort__title sort__option" tabindex="0" aria-label="Trier par date">Titre</div>
+          </div>
+      </div> 
+
+      <!-- Affiche tous les médias d'un photographe -->
+      <section class="media-photographer"></section>
+
     </main>
+
+    <!-- fenêtre modal contatez-moi -->
     <div id="contact_modal">
 			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+				<header class="modalheader">
+          <h2 class = "modalheader__title">Contactez-moi</h2>
+          <img class= "modalheader__close" src="assets/icons/close.svg" alt="Fermer fenêtre de contact">
         </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
+        <h3 class="modal__photographname"></h3>
+				<form class="contactdata" name="contactData" action="photographer.html" method="get">
+					<div class="formData">
+						<label for="first">Prénom</label>
+            <input
+              class="text-control"
+              type="text"
+              id="first"
+              name="first"
+              tabindex="1"
+              />
+          </div>
+          <div class="formData">
+            <label for="last">Nom</label>
+            <input
+              class="text-control"
+              type="text"
+              id="last"
+              name="last"
+              tabindex="1"
+            />
+          </div>
+
+          <div class="formData"  >
+            <label for="email">Email</label>
+            <input
+              class="text-control"
+              type="email"
+              id="email"
+              name="email"
+              tabindex="1"
+            />
+          </div>
+          <div class="formData contactdata__message"  >
+            <label for="message">Votre message</label>
+            <textarea
+              class="text-control"
+              id="message"
+              name="message"
+              tabindex="1">
+            </textarea>
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <input class="contact_button" type="submit" value="Envoyer">
 				</form>
-			</div>
+      </div>
+    </div>
+
+    <!-- The Modal/Lightbox -->
+    <div class="lightbox">
+        <button class="lightbox__close" aria-label="Fermer la lightbox">
+          <svg class="lightbox__close-icon" width="42" height="42" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
+            <path d="M42 4.23L37.77 0L21 16.77L4.23 0L0 4.23L16.77 21L0 37.77L4.23 42L21 25.23L37.77 42L42 37.77L25.23 21L42 4.23Z" fill="currentColor"/>
+          </svg>
+        </button>
+        <div class="light-content"> 
+             <!-- Next/previous controls -->
+            <a class="light-content-previous">&#10094;</a>
+            <a class="light-content-next">&#10095;</a>
+        </div>
 		</div>
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
+    <script type="module" src="./scripts/pages/photographer.js" defer></script>
   </body>
 </html>

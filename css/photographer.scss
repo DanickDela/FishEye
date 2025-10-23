@@ -1,0 +1,503 @@
+@mixin contact-btn {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 170px;
+    height: 70px;
+    border: none;
+    background-color: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #DB8876;
+    }
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+    margin: 0;
+    .display {
+        position: fixed;
+        width: 376px;
+        height: 70px;
+        bottom: 0;
+        right : 38px;
+        border-radius: 5px 5px 0px 0px;
+        background-color: #DB8876;
+        display: flex;
+        flex-direction: row;
+        justify-content:space-around;
+        align-items: center;
+        &__like {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap:15px;
+            &-total{
+                font-size: 24px;
+                font-weight: 500;
+            }
+            &-icon {
+                font-size :30px;
+            }
+        }
+        &__priceday {
+            font-size: 24px;
+            font-weight: 500;
+            margin:0
+        }
+    }
+}
+
+.main-container {
+    margin-left:  100px;
+    margin-right: 100px;
+
+}
+
+.photograph-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FAFAFA;
+    height: 313px;
+    margin: 43px 0px 0px 0px;
+    padding-right: 50px;
+    padding-left: 50px;
+    position: relative;
+    
+
+    .photograph-info {
+ 
+        &__name {
+            font-size: 64px;
+            font-weight: 400;
+            color : #D3573C;
+            margin:0;
+        }
+        &__location {
+            font-size: 24px;
+            font-weight: 400;
+            color : #901C1C;
+            margin:0;
+        }
+        &__tagline {
+            font-size: 18px;
+            font-weight: 400;
+            color : #525252;
+            margin: 0px;
+            margin-top: 9px;
+        }
+        &__contactbtn {
+            @include contact-btn();
+            margin-top: 35px;
+            margin-left:-70px;
+        }
+    }
+
+    .photograph-info__picture {
+        height: 200px;
+        width: 200px;
+        object-fit: cover; /* remplit le cadre sans déformer */
+        object-position: center;
+        border-radius: 200px;
+        border: 2px solid green;
+    }
+}
+
+
+.contact_button {
+    @include contact-btn();
+}
+
+
+//*****************************
+// Elem.ents de tri
+//**************************
+
+.mediasort {
+    display: flex;
+    flex-direction: row;
+    gap: 22px;
+    position: relative;
+    margin-top: 20px;
+    z-index: 100;
+
+    &__title {
+         height: 69px;
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+        font-weight: bold;
+       
+        margin:0;
+    }
+    &__btn {
+        position: absolute;
+        left: 240px;
+        top: 16px;
+        width: 32px; 
+        height: 32px;
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+        z-index: 100; 
+        background-color: #901C1C;
+        border: 0; 
+        cursor: pointer;
+
+        i { 
+            position: absolute; 
+            font-size: 20px; 
+            color: white; 
+            background-color: #901C1C; 
+        }
+        .fa-chevron-down { 
+            opacity: 1; 
+        }
+        .fa-chevron-up  { 
+            opacity: 0; 
+        }
+        &.is-open {
+        .fa-chevron-down { opacity: 0; }
+        .fa-chevron-up   { opacity: 1; }
+        }
+    }
+
+  /* === Menu fermé : ne montrer que l’active, sans trait === */
+    &:not(.is-open) {
+        .sort__option { 
+            Display: none; 
+        }
+        .sort__option.active {
+        display: block;
+        border-radius: 5px;
+        }
+        .sort__option::after { content: none !important; }
+    }
+
+  /* === Menu ouvert : tout afficher + traits === */
+    &.is-open {
+        .sort__option {
+        display: block;
+        border-radius: 0;
+        }
+        .sort__option:first-child { 
+            border-radius: 5px 5px 0 0; 
+        }
+        .sort__option:last-child  {
+             border-radius: 0 0 5px 5px; 
+        }
+
+        .sort__option::after {
+            content: "";
+            position: absolute;
+            left: 10px; bottom: 0;
+            width: 150px; height: 1px;
+            background-color: #FFFFFF;
+        }
+        .sort__option:last-child::after {
+            content: none;
+        }
+    }
+}
+
+.sort {
+    position: absolute; 
+    top: 0; 
+    left: 96px; 
+    z-index: 1;
+    font-size: 18px; 
+    line-height: 69px;
+
+    &__option {
+        position: relative; /* << nécessaire pour ::after */
+        cursor: pointer;
+        padding-left: 20px;
+        background-color: #901C1C; color: white;
+        box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+        width: 170px; height: 69px; border-radius: 0;
+    }
+}
+
+/* État initial si besoin */
+.sort__popularity {
+    display: block;
+}
+.sort__date, .sort__title { 
+    display: none; 
+}
+
+//*****************************
+// Design de la fenetre modale
+//*****************************
+
+#contact_modal {
+  display: none;
+  position: fixed;
+  top: 62px;
+  left: 385px;
+  width: 669px;
+  height: 900px;
+  z-index: 1;
+}
+
+.modal {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 5px;
+    background-color: #DB8876;
+    box-shadow: -5px 10px 30px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    padding: 35px;
+
+    .modalheader {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width:100%;
+        height: 100%;
+        &__title {
+            font-size: 64px;
+            font-weight: 400;
+            margin:0;
+        }
+        &__close {
+            cursor: pointer;   
+        }
+    }
+    &__photographname { 
+        font-size: 64px;
+        font-weight: 400;
+        margin:0;
+        text-align: left;
+    }
+}
+
+form textarea {
+        width: 100%;
+        height: 170px;
+        font-size: 36px;
+        font-weight: 400;
+        border-radius: 5px;
+}
+
+form label {
+    color: #312E2E;
+    font-size: 36px;
+}
+
+form input {
+    width: 100%;
+    height: 68px;
+    font-size: 36px;
+    font-weight: 400;
+    border: none;
+    border-radius: 5px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items:self-start;
+    margin-bottom: 26px;
+}
+
+
+/* Gestion des erreurs de saisie*/
+
+.formData[data-error]::after {
+  content: attr(data-error);
+  font-size: 20px;
+  font-weight: bold;
+  color:red;
+  display: block;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  text-align: left;
+  line-height: 0.3;
+  opacity: 0;
+  transition: 0.3s;
+}
+.formData[data-error-visible="true"]::after {
+  opacity: 1;
+}
+.formData[data-error-visible="true"] .text-control {
+  border: 2px solid #e54858;
+}
+
+//*******************************************
+// Affichage images et videos d'un photographe
+//*******************************************
+
+
+.media-photographer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 30px 0px 0px 0px;
+  gap: 10px 93px;
+
+  .mediascard {
+    width: 350px;
+    height: 350px;
+    margin-bottom: 50px;
+    overflow: hidden;
+    &__link {
+        &__image {
+            height: 300px;
+            width: 100%;
+             // remplie le cadre sans déformer
+            object-fit: cover;
+            object-position: center center;
+    
+        }
+        &__video {
+            height: 300px;
+            width: 100%;
+            object-fit: cover;
+            object-position: center center;
+    
+        }
+    }
+    .mediascardcontent {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        overflow: hidden;
+        margin-top: 10px;
+
+        &__description {
+            font-size: 24px;
+            font-weight: 400;
+            color: #901C1C;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            margin: 0; 
+        }               
+         &__like {
+            display:flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap :50px;
+            width: 90px;
+            position: relative;
+            &-nblike {
+                font-size: 24px;
+                font-weight: 400;
+                color: #901C1C;
+                margin: 0;
+            }
+            &-Heart i {
+                    top:0;
+                    left: 62px;
+                    position: absolute;
+                    font-size: 24px;
+                    color:  #901C1C;
+            }
+            .fa-regular {
+                opacity:1;
+            }
+            .fa-solid {
+                opacity:1;
+            }
+        }      
+    }
+  }
+}
+
+.fa-regular.is-hidden {
+    display: none;
+}
+
+.fa-solid.is-hidden {
+    display: none;
+}
+
+//************************
+// Design de la light
+//*****************************
+
+
+.lightbox {
+    display : none;
+    position: fixed;
+    background-color:white;
+    width: 1440px;
+    height: 1024px;
+    inset: 0;
+    margin: 0;
+    padding-top: 1px;
+    z-index: 120;
+    &__close {
+        position: absolute;
+        top: 77px;
+        right: 126px;
+        width: 42px;
+        height: 42px;
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        color: #901C1C;                  // couleur du SVG (héritée)
+        transition: color 0.3s ease;
+    }
+    .light-content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 62px 99px 10px 99px;
+        &__slide
+        {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap:45px;
+
+            &__photo {
+                width: 1050px;
+                height: 900px;
+                object-fit: cover; /* remplit le cadre sans déformer */
+                object-position: center center;
+            }
+              &__video {
+                width: 1050px;
+                height: 900px;
+                object-fit: cover;
+                object-position: center center;
+    
+        }
+            &__title {
+                font-size: 24px;
+                font-weight: 400;
+                margin: 0;
+                color: #901C1C;
+            }
+
+        }
+
+    }
+}
+
+/* Next & previous buttons */
+.light-content-previous,
+.light-content-next {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width:96px;
+    color: #901C1C;
+    font-weight: 400;
+    font-size: 48px;
+    transition: 0.6s ease;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+
+

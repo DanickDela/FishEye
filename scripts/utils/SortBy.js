@@ -72,25 +72,12 @@ export const sortBy = () => {
       });
   });
 
-  // Prise en compte des fléches
-  arrowUpdown.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.keyCode === 13) {
-      const clickEvent = new MouseEvent("click", {
-        bubbles: true, cancelable: true, view: window
-      });
-      arrow.dispatchEvent(clickEvent);
-    }
-  });
-  
  
 // Prise en compte du clavier
   sortOptions.forEach((option) => {
     option.addEventListener("keydown", (e) => {
       if (e.key ==="Enter" || e.keyCode === 13) {
-        const clickEvent = new MouseEvent("click", {
-          bubbles: true, cancelable: true, view: window });
-  
-        sortOptions.dispatchEvent(clickEvent);
+        option.click()
       } 
     });
   });

@@ -1,26 +1,29 @@
 import {photographersTemplate} from '../templates/photographersDisplay.js'  
 import {getPhotographers} from '../utils/getData.js'
 
-      
-/**
- * Affiche la liste des photographes sur la page.
+/**********************************************************************************
+ * Type représentant un photographe.
+ * @typedef {object} Photographer
+ * @property {string} name - Nom du photographe.
+ * @property {number} id - Identifiant unique.
+ * @property {string} portrait - Nom du fichier image.
+ * @property {string} city - Ville.
+ * @property {string} country - Pays.
+ * @property {string} tagline - Phrase d’accroche.
+ * @property {number} price - Tarif journalier.
+ */
+
+/**********************************************************************************
+ * Affiche la liste des photographes sur la page d'accueil.
  *
  * @async
  * @function displayData
- * @param {Array<Object>} photographers - Tableau des objets photographes récupérés depuis les données JSON.
- * @param {string} photographers[].name - Nom du photographe.
- * @param {number} photographers[].id - Identifiant unique du photographe.
- * @param {string} photographers[].portrait - Nom du fichier image du photographe.
- * @param {string} photographers[].city - Ville du photographe.
- * @param {string} photographers[].country - Pays du photographe.
- * @param {string} photographers[].tagline - Phrase d’accroche du photographe.
- * @param {number} photographers[].price - Tarif journalier du photographe.
+ * @param {Photographer[]} photographers - Tableau des photographes récupérés depuis les données JSON.
+ * @returns {Promise<void>} Promesse résolue une fois l’affichage terminé
  * 
- * @returns {void}
- *
  * @description
  * Pour chaque photographe :
- * - Crée une carte (DOM) à partir du template `photographerTemplate()`
+ * - Crée une carte DOM à partir de `photographersTemplate()`
  * - Ajoute cette carte dans la section `.photographer`
  */
 async function displayData(photographers) {
@@ -30,24 +33,32 @@ async function displayData(photographers) {
     photographers.forEach((photographer) => {
 
         const photographerModel = photographersTemplate(photographer);
+        
         // Création du modèle de photographe à partir du template 
         const userCardDOM = photographerModel.getUserCardDOM();
+
         // Ajout du modèle au DOM
         photographersSection.appendChild(userCardDOM);
         
     });
 }
-/**
+
+
+/**********************************************************************************
  * Initialise la page d'accueil :
  * - Récupère et affiche les données des photographes
  * @async
- * @function init
- * @returns {<void>} - Promesse résolue une fois l’affichage terminé.
+ * @function init 
+ * @returns {Promise<void>} Promesse faite après rendu des cartes.
+ *
+ * @description
+ *  Récupère et affiche les données des photographes.
+ *  Affiche tous les photographes sur la page
  */
-
-async function init() {
+ async function init() {
     // Récupère les datas des photographes
     const { photographers } = await getPhotographers();
+
     // Affiche tous les photographes sur la page
     displayData(photographers);
 

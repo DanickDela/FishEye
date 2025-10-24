@@ -3,37 +3,6 @@ body {
   font-family: "DM Sans", sans-serif;
   margin: 0;
 }
-body .display {
-  position: fixed;
-  width: 376px;
-  height: 70px;
-  bottom: 0;
-  right: 38px;
-  border-radius: 5px 5px 0px 0px;
-  background-color: #DB8876;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}
-body .display__like {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 15px;
-}
-body .display__like-total {
-  font-size: 24px;
-  font-weight: 500;
-}
-body .display__like-icon {
-  font-size: 30px;
-}
-body .display__priceday {
-  font-size: 24px;
-  font-weight: 500;
-  margin: 0;
-}
 
 .main-container {
   margin-left: 100px;
@@ -51,6 +20,38 @@ body .display__priceday {
   padding-right: 50px;
   padding-left: 50px;
   position: relative;
+}
+.photograph-header .display {
+  position: fixed;
+  width: 376px;
+  height: 70px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(calc(680px - 100%));
+  border-radius: 5px 5px 0px 0px;
+  background-color: #DB8876;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.photograph-header .display__like {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+.photograph-header .display__like-total {
+  font-size: 24px;
+  font-weight: 500;
+}
+.photograph-header .display__like-icon {
+  font-size: 30px;
+}
+.photograph-header .display__priceday {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0;
 }
 .photograph-header .photograph-info__name {
   font-size: 64px;
@@ -135,7 +136,7 @@ body .display__priceday {
 }
 .mediasort__btn {
   position: absolute;
-  left: 240px;
+  left: 224px;
   top: 16px;
   width: 32px;
   height: 32px;
@@ -166,14 +167,14 @@ body .display__priceday {
   opacity: 1;
 }
 .mediasort:not(.is-open) .sort__option {
-  Display: none;
+  display: none;
 }
 .mediasort:not(.is-open) .sort__option.active {
   display: block;
   border-radius: 5px;
 }
 .mediasort:not(.is-open) .sort__option::after {
-  content: none !important;
+  content: none;
 }
 .mediasort.is-open .sort__option {
   display: block;
@@ -185,11 +186,20 @@ body .display__priceday {
 .mediasort.is-open .sort__option:last-child {
   border-radius: 0 0 5px 5px;
 }
-.mediasort.is-open .sort__option::after {
+.mediasort.is-open .sort__popularity::after {
   content: "";
   position: absolute;
+  top: 60px;
   left: 10px;
-  bottom: 0;
+  width: 150px;
+  height: 1px;
+  background-color: #FFFFFF;
+}
+.mediasort.is-open .sort__date::after {
+  content: "";
+  position: absolute;
+  top: 62px;
+  left: 10px;
   width: 150px;
   height: 1px;
   background-color: #FFFFFF;
@@ -207,15 +217,15 @@ body .display__priceday {
   line-height: 69px;
 }
 .sort__option {
-  position: relative; /* << nécessaire pour ::after */
+  position: relative;
   cursor: pointer;
-  padding-left: 20px;
   background-color: #901C1C;
   color: white;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   width: 170px;
   height: 69px;
   border-radius: 0;
+  text-indent: 20px;
 }
 
 /* État initial si besoin */
@@ -329,8 +339,8 @@ form div {
   gap: 10px 93px;
 }
 .media-photographer .mediascard {
-  width: 350px;
-  height: 350px;
+  width: 100%;
+  height: auto;
   margin-bottom: 50px;
   overflow: hidden;
 }
@@ -467,6 +477,8 @@ form div {
   flex-direction: row;
   justify-content: center;
   width: 96px;
+  background-color: #FFFFFF;
+  border: 0;
   color: #901C1C;
   font-weight: 400;
   font-size: 48px;

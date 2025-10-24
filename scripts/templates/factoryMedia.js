@@ -44,7 +44,7 @@ const pageMediaTemplate = async (data) => {
             linkMediaCard.appendChild(photo);
             linkMediaCard.href = `Sample Photos/${photographerName}/${image}`;
             linkMediaCard.title= title; 
-            photo.setAttribute('tabindex', '1');
+            photo.setAttribute('tabindex', '0');
             mediaCard.setAttribute('aria-label', `photo représentant : ${title}`);
         } else if (mediaType === "video") {
             const videoPreview = document.createElement('video');
@@ -54,7 +54,7 @@ const pageMediaTemplate = async (data) => {
             linkMediaCard.appendChild(videoPreview);
             linkMediaCard.href = `Sample Photos/${photographerName}/${video}`;
             linkMediaCard.title= title; 
-            videoPreview.setAttribute('tabindex', '1');
+            videoPreview.setAttribute('tabindex', '0');
             mediaCard.setAttribute('aria-label', `vidéo de : ${title}`);
         }
 
@@ -72,12 +72,13 @@ const pageMediaTemplate = async (data) => {
 
         const like= document.createElement ('div');
         like.classList.add('mediascardcontent__like');
+
         contentMediaCard.appendChild(like);
 
-        const nbLikeCard= document.createElement ('p');
+        const nbLikeCard= document.createElement ('span');
         nbLikeCard.textContent = `${likes}`;
         nbLikeCard.classList.add('mediascardcontent__like-nblike');
-        nbLikeCard.setAttribute('tabindex', '1');
+        nbLikeCard.setAttribute('tabindex', '0');
         nbLikeCard.setAttribute('aria-label', `Nombre de likes : ${likes}`);
         like.appendChild(nbLikeCard);
 

@@ -1,18 +1,24 @@
 
 /**
- * Crée un template pour afficher tous les photographes sur la page d'acceuil.
+ * *
  * @param {Photographer} data - Données du photographe.
  * @returns {{name:string, picture:string, city:string, country:string, tagline:string, price:number, getUserCardDOM: ()=>HTMLElement}}
- * Objet avec infos du photographe et la méthoe  getUserCardD pour construire le templete pour  insérer dans le dom
+ * Objet avec infos du photographe et la méthoe  getUserCardD pour construire le template pour  insérer dans le dom
+ * 
+ * @description
+ * La fonction prépare les données et utilise la méthoede `getUserCardDOM` qui,
+ * une fois appelé, génère un `<article>` complet représentant un photographe.
  */
-
 export const photographersTemplate = (data) => {
     const { name, id, portrait, city, country, tagline, price } = data;
     const picture = `assets/photographers/${portrait}`;
 
     /**
-    * Construit l’élément DOM représentant la liste des photographes
+    **
     * @returns {HTMLElement} L’élément `<article>` complet prêt à être inséré dans le DOM.
+    *
+    * @description
+    *   * Construit et retourne l’élément DOM représentant la liste des photographes
     */
     const getUserCardDOM = () => {
         
@@ -23,22 +29,20 @@ export const photographersTemplate = (data) => {
         const linkPhotographer = document.createElement( 'a' );
         linkPhotographer.href = `photographer.html?id=${id}`
         linkPhotographer.classList.add("photographer-card-link");
-        linkPhotographer.dataset.id = id;
-        linkPhotographer.setAttribute('aria-label', `Page du photographe : ${name}`); 
         article.appendChild(linkPhotographer);
 
 
         const img = document.createElement( 'img' );
         img.classList.add("photographer-card__image");
         img.src=picture;
-        img.alt =name;
-        img.setAttribute('aria-label', `Photo du photographe : ${name}`);
+        img.alt ='Photo de ' + name;
+
         linkPhotographer.appendChild(img);
 
         const h2 = document.createElement( 'h2' );
         h2.classList.add("photographer-card__name");
         h2.textContent = name;
-        h2.setAttribute('aria-label', `Nom du photographe : ${name}`);
+        //h2.setAttribute('aria-label', `Nom du photographe : ${name}`);
         linkPhotographer.appendChild(h2);
       
 
@@ -57,13 +61,13 @@ export const photographersTemplate = (data) => {
         const TagLine= document.createElement( 'p' );
         TagLine.classList.add("photographer-card__tagline");
         TagLine.textContent = tagline;
-        TagLine.setAttribute('aria-label', `Slogan du photographe : ${tagline}`);
+        TagLine.setAttribute('aria-label', `Slogan du photographe `);
         PhotographerInfo.appendChild(TagLine);
 
         const  PricePerDay= document.createElement( 'p' );
         PricePerDay.classList.add("photographer-card__price");
         PricePerDay.textContent = `${price}€/jour`;
-        PricePerDay.setAttribute('aria-label', `Tarif du photographe à la journée : ${price}€`);
+        PricePerDay.setAttribute('aria-label', `Tarif du photographe `);
         PhotographerInfo.appendChild(PricePerDay);
 
 

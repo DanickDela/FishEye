@@ -3,8 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Fisheye - photographe </title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="./css/style.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,8 +13,8 @@
 
   <body>
     <header>
-      <a href="./index.html">
-      <img  src="assets/images/logo.png" class="logo" />
+      <a href="./index.html" aria-label="lien vers la page d'accueil">
+      <img  src="assets/images/logo.png" class="logo" alt="Logo de la société Fisheye">
       </a>
     </header>
 
@@ -30,9 +29,9 @@
           </button>
 
           <div class="sort" id="sortMenu">
-            <div class="sort__popularity sort__option" tabindex="0" aria-label="Trier par popularité">Popularité</div>
-            <div class="sort__date sort__option" tabindex="0" aria-label="Trier par date">Date</div>
-            <div class="sort__title sort__option" tabindex="0" aria-label="Trier par date">Titre</div>
+            <div class="sort__popularity sort__option" tabindex="0" aria-label="Trier les résultats par popularité">Popularité</div>
+            <div class="sort__date sort__option" tabindex="0" aria-label="Trierles résultats par date">Date</div>
+            <div class="sort__title sort__option" tabindex="0" aria-label="Trier les résultats par titre">Titre</div>
           </div>
       </div> 
 
@@ -46,7 +45,7 @@
 			<div class="modal">
 				<header class="modalheader">
           <h2 class = "modalheader__title">Contactez-moi</h2>
-          <img class= "modalheader__close" src="assets/icons/close.svg" alt="Fermer fenêtre de contact">
+          <img class= "modalheader__close" src="assets/icons/close.svg" alt="Fermer fenêtre de contact" aria-label="Fermer">
         </header>
         <h3 class="modal__photographname"></h3>
 				<form class="contactdata" name="contactData" action="photographer.html" method="get">
@@ -57,8 +56,8 @@
               type="text"
               id="first"
               name="first"
-              tabindex="1"
-              />
+              tabindex="0"
+              >
           </div>
           <div class="formData">
             <label for="last">Nom</label>
@@ -67,8 +66,8 @@
               type="text"
               id="last"
               name="last"
-              tabindex="1"
-            />
+              tabindex="0"
+            >
           </div>
 
           <div class="formData"  >
@@ -78,16 +77,16 @@
               type="email"
               id="email"
               name="email"
-              tabindex="1"
-            />
+              tabindex="0"
+            >
           </div>
-          <div class="formData contactdata__message"  >
+          <div class="formData contactdata__message" >
             <label for="message">Votre message</label>
             <textarea
               class="text-control"
               id="message"
               name="message"
-              tabindex="1">
+              tabindex="0">
             </textarea>
 					</div>
           <input class="contact_button" type="submit" value="Envoyer">
@@ -104,10 +103,10 @@
         </button>
         <div class="light-content"> 
              <!-- Next/previous controls -->
-            <a class="light-content-previous">&#10094;</a>
-            <a class="light-content-next">&#10095;</a>
+            <button type ="button" class="light-content-previous" aria-label="Média précédent">&#10094;</a>
+            <button type ="button" class="light-content-next" aria-label="Média suivant">&#10095;</a>
         </div>
 		</div>
-    <script type="module" src="./scripts/pages/photographer.js" defer></script>
+    <script type="module" src="./scripts/pages/photographer.js"></script>
   </body>
 </html>

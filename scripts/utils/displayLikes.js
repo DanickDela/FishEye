@@ -18,7 +18,7 @@ export const displayLike= () => {
     const updateTotal = (update) => {
         const n = parseInt(likeTotal.textContent || '0', 10) + update;
         likeTotal.textContent = String(n);
-        likeTotal.setAttribute('aria-label', `${n} likes`);
+        likeTotal.setAttribute('aria-label', `Nombre total de likes ${n}`);
     };
 
     // écoute des clics sur chaque bloc like

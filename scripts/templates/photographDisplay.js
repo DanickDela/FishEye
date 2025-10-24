@@ -29,14 +29,14 @@ export const PhotographTemplate = (data) => {
         const photograpName = document.createElement( 'h1' );
         photograpName.textContent = name;
         photograpName.classList.add('photograph-info__name');
-        photograpName.setAttribute('aria-label', `nom du photographe : ${name}`);
+        photograpName.setAttribute('aria-label', `Nom du photographe : ${name}`);
         photographInfo.appendChild(photograpName);
 
     
         const cityCountry = document.createElement( 'h2' );
         cityCountry.textContent = `${city}, ${country}`;
         cityCountry.classList.add('photograph-info__location');
-        cityCountry.setAttribute('aria-label', `Position du photographe : ${city}, ${country}`);
+        cityCountry.setAttribute('aria-label', `Localisation du photographe : ${city}, ${country}`);
         photographInfo.appendChild(cityCountry);
 
         const Tagline = document.createElement( 'p' );
@@ -62,7 +62,7 @@ export const PhotographTemplate = (data) => {
         
         const display =  document.createElement ('div')  
         display.classList.add('display')
-        document.body.appendChild(display);
+        photographHeader.appendChild(display);
         
         const displayLike= document.createElement ('div');
         displayLike.classList.add('display__like');

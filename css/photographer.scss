@@ -18,12 +18,32 @@
 body {
     font-family: "DM Sans", sans-serif;
     margin: 0;
+}
+
+.main-container {
+    margin-left:  100px;
+    margin-right: 100px;
+}
+
+.photograph-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FAFAFA;
+    height: 313px;
+    margin: 43px  0px 0px 0px;
+    padding-right: 50px;
+    padding-left: 50px;
+    position: relative;
+
     .display {
         position: fixed;
         width: 376px;
         height: 70px;
         bottom: 0;
-        right : 38px;
+        left : 50%;
+        transform: translateX(calc(680px - 100%));
         border-radius: 5px 5px 0px 0px;
         background-color: #DB8876;
         display: flex;
@@ -49,29 +69,9 @@ body {
             margin:0
         }
     }
-}
-
-.main-container {
-    margin-left:  100px;
-    margin-right: 100px;
-
-}
-
-.photograph-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #FAFAFA;
-    height: 313px;
-    margin: 43px 0px 0px 0px;
-    padding-right: 50px;
-    padding-left: 50px;
-    position: relative;
-    
 
     .photograph-info {
- 
+
         &__name {
             font-size: 64px;
             font-weight: 400;
@@ -127,7 +127,7 @@ body {
     z-index: 100;
 
     &__title {
-         height: 69px;
+        height: 69px;
         display: flex;
         align-items: center;
         font-size: 18px;
@@ -137,7 +137,7 @@ body {
     }
     &__btn {
         position: absolute;
-        left: 240px;
+        left: 224px;
         top: 16px;
         width: 32px; 
         height: 32px;
@@ -170,20 +170,22 @@ body {
   /* === Menu fermé : ne montrer que l’active, sans trait === */
     &:not(.is-open) {
         .sort__option { 
-            Display: none; 
+            display: none; 
         }
         .sort__option.active {
-        display: block;
-        border-radius: 5px;
+            display: block;
+            border-radius: 5px;
         }
-        .sort__option::after { content: none !important; }
+        .sort__option::after { 
+            content: none  
+        }
     }
 
   /* === Menu ouvert : tout afficher + traits === */
     &.is-open {
         .sort__option {
-        display: block;
-        border-radius: 0;
+            display: block;
+            border-radius: 0;
         }
         .sort__option:first-child { 
             border-radius: 5px 5px 0 0; 
@@ -192,13 +194,26 @@ body {
              border-radius: 0 0 5px 5px; 
         }
 
-        .sort__option::after {
+        .sort__popularity::after {
             content: "";
             position: absolute;
-            left: 10px; bottom: 0;
-            width: 150px; height: 1px;
+            top : 60px;
+            left: 10px; 
+            width: 150px; 
+            height: 1px;
+            background-color:  #FFFFFF;
+
+        }
+        .sort__date::after {
+            content: "";
+            position: absolute;
+            top : 62px;
+            left: 10px; 
+            width: 150px; 
+            height: 1px;
             background-color: #FFFFFF;
         }
+        
         .sort__option:last-child::after {
             content: none;
         }
@@ -214,12 +229,15 @@ body {
     line-height: 69px;
 
     &__option {
-        position: relative; /* << nécessaire pour ::after */
+        position: relative; 
         cursor: pointer;
-        padding-left: 20px;
-        background-color: #901C1C; color: white;
+        background-color: #901C1C; 
+        color: white;
         box-shadow: 0 4px 4px rgba(0,0,0,0.25);
-        width: 170px; height: 69px; border-radius: 0;
+        width: 170px; 
+        height: 69px; 
+        border-radius: 0;
+        text-indent: 20px;
     }
 }
 
@@ -344,8 +362,8 @@ form div {
   gap: 10px 93px;
 
   .mediascard {
-    width: 350px;
-    height: 350px;
+    width:100%;
+    height:auto;
     margin-bottom: 50px;
     overflow: hidden;
     &__link {
@@ -491,6 +509,8 @@ form div {
     flex-direction: row;
     justify-content: center;
     width:96px;
+    background-color: #FFFFFF;
+    border :0;
     color: #901C1C;
     font-weight: 400;
     font-size: 48px;

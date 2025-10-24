@@ -69,19 +69,19 @@ h1 {
 }
 .photographer-card__info .photographer-card__location {
   color: #901C1C;
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 400;
   margin: 0px;
 }
 .photographer-card__info .photographer-card__tagline {
   color: #000000;
-  font-size: 10px;
+  font-size: 16px;
   font-weight: 400;
   margin: 3px;
 }
 .photographer-card__info .photographer-card__price {
   color: #757575;
-  font-size: 9px;
+  font-size: 15px;
   font-weight: 800;
   margin: 3px;
 }

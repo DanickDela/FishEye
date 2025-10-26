@@ -29,26 +29,6 @@ export const getPhotographers= async() => {
 };
 
 /**
- * Récupère un photographe spécifique à partir de son identifiant.
- *
- * @async
- * @function getPhotographerFromID
- * @param {number|string} id - L’identifiant du photographe à rechercher.
- * @returns {<Object>} 
- * Retourne l’objet du photographe   
- * ou `undefined` si aucun photographe ne correspond.
- */
-export const getPhotographerFromID = async (id) => {
-    // Récupérer toutes les données des photographes
-    const data = await getPhotographers();
-    const photographers = data.photographers;
-
-    //Recherche le photographe pour l'id demandé
-    const photographer = photographers.find(photographer => photographer.id == id);
-    return photographer;
-}
-
-/**
  * Extrait l’identifiant du photographe à partir des paramètres de l’URL courante.
  *
  * @function getPhotographIdfromURL

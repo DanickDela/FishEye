@@ -1,61 +1,74 @@
 
-import {PhotographTemplate} from '../templates/photographDisplay.js'  
-import {getPhotographers, getPhotographIdfromURL}  from '../utils/getData.js'
-import pageMediaTemplate from '../templates/factoryMedia.js'
-import {lightBox} from '../utils/lightbox.js'
-import {sortBy} from '../utils/SortBy.js'
-import {displayLike} from '../utils/displayLikes.js'
+import {getPhotographers, getPhotographIdfromURL}  from '../utils/getData.js';
+import {DefinePhotographerHeader } from "../templates/PhotograperHeader.js";
+import {DefineMediaTemplate} from '../templates/MediaCard.js'
+import {lightBox} from '../utils/lightbox.js';
+import {sortBy} from '../utils/SortBy.js';
+import {displayLike} from '../utils/displayLikes.js';
 
 
 export const getPhotographer = async () => {
 
-    //permet d'utiliser l'ID récupéré dans l'URL dans la function en dynamique
+    // Récupérer l'ID du photographe depuis l'URL
     const photographerId = getPhotographIdfromURL();
 
+    //Charger toutes les données (photographes + médias)
     const data = await getPhotographers();
-    const photographers = data.photographers
-    const mediasPhotographers = data.media
+    const photographers = data.photographers;
+    const mediasPhotographers = data.media;
 
-    // Rechercher le photographe dont l'ID correspond à celui de l'URL
+    //Trouver le photographe correspondant à l'id
     const photographerCard = photographers.find(p => Number(p.id)=== Number(photographerId))
 
+
     if (photographerCard !== null) {
-        // Création du template pour le header du photographe
-        const photographerModel = PhotographTemplate(photographerCard);
-        const userCardDOM = photographerModel.getUserCardDOM();
+        //Création du modèle Photographe (via Factory)
+        const photographer = ModelFactory.DisplayPhotographer(photographerCard);
 
-
-        // Insertion du header pour le photographe dans main
+        //construction du header Photographe
         const photographersSection = document.querySelector('.photograph-display')
-        photographersSection.appendChild(userCardDOM);
+        photographersSection.appendChild(DefinePhotographerHeader(photographer));
+        
+        /****************
+         *  Médias du photographe
+         */
 
+        // Filtrer uniquement les médias de ce photographe
+        const filteredMedias = mediasPhotographers
+            .filter(m => Number(m.photographerId) === Number(photographerId)
+        );
 
+        // Convertir en modèles MediaInfo
+        const medias = filteredMedias.map(m => ModelFactory.DisplayMedia(m))
+
+        // Ajout du nom du photographe dans chaque média (ex: dossier nom)
+        // Ici on ne garde que le prénom : "Mimi", "Ellie-Rose", etc.
+        const photographerName = photographerCard.name.split(' ')[0].replace('-', ' ');
+
+        medias.forEach(m => {
+           m.photographername= photographerName;
+
+        });
+
+        //Affichage des cartes média
         const mediaPhotographerSection = document.querySelector('.media-photographer');
+        medias.forEach(m => mediaPhotographerSection.appendChild(DefineMediaTemplate(m)))
 
-        // Filtrer les médias du photographe actuel 
-        const mediasPhotographer = mediasPhotographers.filter(me => me.photographerId == photographerId);
 
-        for (let i = 0; i < mediasPhotographer.length; i++) {
-            const media = mediasPhotographer[i];
-            const mediaModel = await pageMediaTemplate(media);
-            const mediaCardDOM = mediaModel.getModelCardDOM();
-            mediaPhotographerSection.appendChild(mediaCardDOM);   
-       }
-
-        // Ajout du nom du photographe
+        // Nom du photographe dans la modale de contact
          const namePhotograph = photographerCard.name; 
          const photographName = document.querySelector(".modal__photographname");
          photographName.textContent =namePhotograph;
          photographName.setAttribute ('aria-label', 'Nom du photographe: ${name}');
 
-        //affichage des likes
-
+        //Affichage du total de likes
         displayLike();
 
-        // Menu trier
+        //Activation du tri
         sortBy ();
 
-        // attendre que les images des cartes soient chargées (optionnel mais sûr)
+        // attendre que les images des cartes soient chargées 
+        //Initialisation lightbox 
         window.requestAnimationFrame(() => {
             lightBox.init();
         });

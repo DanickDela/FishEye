@@ -2,7 +2,7 @@
 // ============================================================
 // Gestion de la fenêtre modale de contact
 // ============================================================
-
+const mainContainer =  document.getElementById("main-wrapper");
 const modal = document.getElementById("contact_modal");
 const form = document.querySelector(".contactdata");
 const firstName = document.getElementById("first");
@@ -92,6 +92,31 @@ const messageValidate = (balise) =>{
     }
 }
 
+/*
+ * Affiche la fenêtre modale du formulaire de contact.
+ * Met automatiquement le focus sur le premier champ (prénom).
+ */
+export const displayModal = () => {
+    mainContainer.inert=true;
+    modal.style.display = 'block';
+    modal.inert=false;
+    document.body.classList.add('no-scroll');
+    closeBtn.focus();
+};
+
+/**
+ * Ferme la fenêtre modale de contact.
+ */
+export const closeModal = () => {
+
+    contactBtn.focus();
+    mainContainer.inert=false;
+    modal.inert=true;
+    document.body.classList.remove('no-scroll');
+    modal.style.display = "none";;
+    form.reset(); //vide le formulaire
+};
+
 // ============================================================
 // Écouteurs d'événements et validation en temps réel
 // ============================================================
@@ -125,6 +150,8 @@ Email.addEventListener("blur", ()=>{
 if (message) {
 //Vérifier la validité du message
 message.addEventListener("blur", ()=>{
+    const textarea = document.getElementById("message");
+    textarea.setSelectionRange(0, 0);       
     messageValidate(message);
 })
 }
@@ -172,19 +199,11 @@ form.addEventListener("submit", (event) => {
     }
 });
 
-/*
- * Affiche la fenêtre modale du formulaire de contact.
- * Met automatiquement le focus sur le premier champ (prénom).
- */
-export const displayModal = () => {
-  modal.style.display = 'block';
-  firstName.focus();
-};
 
-/**
- * Ferme la fenêtre modale de contact.
- */
-export const closeModal = () => {
-    modal.style.display = "none";
-    form.reset(); //vide le formulaire
-};
+// Close modal when espace key is pressed
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.inert) {
+        closeModal();
+  }
+});
+

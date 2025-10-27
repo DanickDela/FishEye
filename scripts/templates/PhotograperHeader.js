@@ -49,6 +49,7 @@ export function DefinePhotographerHeader (photographer) {
       const contactBtn = document.createElement('button');
       contactBtn.textContent = 'Contactez-moi';
       contactBtn.classList.add('photograph-info__contactbtn');
+      contactBtn.type="button";
       contactBtn.addEventListener('click', displayModal);
       photographHeader.appendChild(contactBtn);
 

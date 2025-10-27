@@ -20,7 +20,6 @@ export function DefineMediaTemplate (media) {
     
     const linkMediaCard = document.createElement('a');
     linkMediaCard.classList.add('mediascard__link');
-    linkMediaCard.setAttribute('tabindex', '0');
     mediaCard.appendChild(linkMediaCard)
     
     let visual
@@ -66,22 +65,17 @@ export function DefineMediaTemplate (media) {
     nbLikeCard.setAttribute('aria-label', `Nombre de likes : ${media.likes}`);
     like.appendChild(nbLikeCard);
 
-
-
     const likeHeart= document.createElement ('div');
-    likeHeart.classList.add('mediascardcontent__like-Heart');
-    likeHeart.setAttribute('tabindex', '0');
+    likeHeart.classList.add('mediascardcontent__like-btn');
     like.appendChild(likeHeart);
 
         // Créer les deux icônes
     const heartRegular = document.createElement('i');
     heartRegular.classList.add('fa-regular', 'fa-heart');
-    likeHeart.setAttribute('tabindex', '0');
     likeHeart.appendChild(heartRegular);
 
     const heartSolid = document.createElement('i');
     heartSolid.classList.add('fa-solid', 'fa-heart');
-    likeHeart.setAttribute('tabindex', '0');
     likeHeart.appendChild(heartSolid);
 
 

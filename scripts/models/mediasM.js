@@ -76,12 +76,16 @@ class MediaInfo {
     * Retourne une date valide ou null.
     * @returns {Date|null} Date valide ou null si non valide.
     */
-    get date() {
+    get formatDate() {
 
         //vérifie si la date est valide
         let FormatDate = new Date(this._date);
         let DateValid = isNaN(FormatDate.getTime()) ? null : FormatDate ;
 
         return DateValid;
-  }
+    } 
+    get date () {
+          return this._date; 
+    }
+
 }

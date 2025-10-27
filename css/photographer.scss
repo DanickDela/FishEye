@@ -124,7 +124,7 @@ body {
     gap: 22px;
     position: relative;
     margin-top: 20px;
-    z-index: 100;
+    z-index: 10;
 
     &__title {
         height: 69px;
@@ -144,7 +144,7 @@ body {
         display: flex; 
         align-items: center; 
         justify-content: center;
-        z-index: 100; 
+        z-index: 10; 
         background-color: #901C1C;
         border: 0; 
         cursor: pointer;
@@ -224,7 +224,7 @@ body {
     position: absolute; 
     top: 0; 
     left: 96px; 
-    z-index: 1;
+    z-index: 5;
     font-size: 18px; 
     line-height: 69px;
 
@@ -260,7 +260,7 @@ body {
   left: 385px;
   width: 669px;
   height: 900px;
-  z-index: 1;
+  z-index: 1000;
 }
 
 .modal {
@@ -327,7 +327,6 @@ form div {
     margin-bottom: 26px;
 }
 
-
 /* Gestion des erreurs de saisie*/
 
 .formData[data-error]::after {
@@ -349,6 +348,11 @@ form div {
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
+
+.no-scroll {
+   overflow: hidden;
+}
+
 
 //*******************************************
 // Affichage images et videos d'un photographe
@@ -419,7 +423,7 @@ form div {
                 margin: 0;
             }
 
-            &-Heart {
+            &-btn {
                 display: inline-grid;
                 place-items: center;
                 width: 24px; 

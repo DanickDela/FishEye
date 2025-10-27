@@ -1,8 +1,8 @@
-export const lightBox= {
+export const lightBox = {
 
     init () {
 
-
+        const mainContainer=document.getElementById('main-wrapper')
         const modalLightbox = document.querySelector(".lightbox");
         const lightContent = document.querySelector(".light-content");
         const photolinks = Array.from(document.querySelectorAll(".mediascard__link"));
@@ -10,10 +10,13 @@ export const lightBox= {
         const nextSlide=document.querySelector(".light-content-next");
         const closeBtn=document.querySelector(".lightbox__close");
 
+        // Variable pour mémoriser le focus avant ouverture
+        let lastFocus=null;
+
         const buildSlides = () => {
         
             lightContent.querySelectorAll(".light-content__slide").forEach(n => n.remove());
-            
+          
 
             photolinks.forEach(link => {
                 const href  = link.getAttribute("href");
@@ -22,8 +25,11 @@ export const lightBox= {
                             || "";
 
         
+
                 const divSlide = document.createElement('div');
                 divSlide.className = 'light-content__slide';
+                divSlide.setAttribute("aria-label",`${title}`);
+
 
                   const firstChild = link.firstElementChild;
 
@@ -31,7 +37,6 @@ export const lightBox= {
                     const photoSlide = document.createElement('img');
                     photoSlide.className = 'light-content__slide__photo';
                     photoSlide.alt = `Photo réprésentant : ${title}`;
-                    photoSlide.setAttribute('aria-label', `Agrandissement de la photo : ${title}`);
                     photoSlide.src = href;
                     divSlide.appendChild(photoSlide);
                 } else if (firstChild.tagName.toLowerCase() === 'video') {
@@ -40,7 +45,6 @@ export const lightBox= {
                     videoSlide.preload = 'metadata';   
                     videoSlide.className = 'light-content__slide__video';
                     videoSlide.alt = `Vidéo représentant : ${title}`;
-                    videoSlide.setAttribute('aria-label', `Agrandissement de la vidéo : ${title}`);
                     videoSlide.src = href;
                     divSlide.appendChild(videoSlide);
 
@@ -67,20 +71,39 @@ export const lightBox= {
     // Affiche seulement l'index demandé
     let current = 0;
     const show = (i) => {
-      const slides = lightContent.querySelectorAll(".light-content__slide");
-      const max = slides.length;
-      const idx = ((i % max) + max) % max;
-      slides.forEach((s, j) => s.style.display = (idx === j ? "block" : "none"));
+        const slides = lightContent.querySelectorAll(".light-content__slide");
+        const max = slides.length;
+        const idx = ((i % max) + max) % max;
+        slides.forEach((s, j) => s.style.display = (idx === j ? "block" : "none"));
       current = i;
     };
+
+    const displayModal = () => {
+        mainContainer.inert=true;
+        modalLightbox.style.display = 'block';
+        modalLightbox.inert=false;
+        document.body.classList.add('no-scroll');
+        closeBtn.focus();
+    };
+    
+
+    const closeModal = () => {
+        lastFocus.focus();
+        mainContainer.inert=false;
+        modalLightbox.inert=true;
+        document.body.classList.remove('no-scroll');
+        modalLightbox.style.display = "none";;
+    };
+    
 
      // Ouvrir depuis une vignette
     photolinks.forEach((link, index) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
+        lastFocus=e.currentTarget;
         buildSlides();            // créer toutes les slides
-        modalLightbox.style.display = "flex";
-        previousSlide.focus()
+        displayModal();
+        closeBtn.focus();
         show(index);              // montre le slide cliquée
 
       });
@@ -88,24 +111,40 @@ export const lightBox= {
 
     // Fermer 
     closeBtn.addEventListener("click", (e) => {
-        modalLightbox.style.display = "none";
-        modalLightbox.setAttribute('aria-labbel', 'fermer');
+        closeModal();
     });
 
 
     // Navigation (si tu as .prev / .next dans le HTML)
     previousSlide.addEventListener("click", (e) => {
-      e.preventDefault();
-      show(current - 1);
+        show(current - 1);
     });
 
     nextSlide.addEventListener("click", (e) => {
-      e.preventDefault();
-      show((current + 1));
+        show((current + 1));
     });
 
+    document.addEventListener('keydown', (e) => {
+    switch (e.key) {
+        case 'ArrowRight':
+            show((current + 1));
+        break;
+        case 'ArrowLeft':
+            show((current - 1));
+        break;
+        case 'Escape':
+            if (!modalLightbox.inert) closeModal();
+        break;
+
+      default:
+        break;
+    }
+  });
+
 }
 
 }
+
+
 
 

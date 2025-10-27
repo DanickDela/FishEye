@@ -42,11 +42,11 @@
 
     <!-- fenêtre modal contatez-moi -->
     <div id="contact_modal">
-			<div class="modal" role="dialog" aria-describedby="modaltitle">
-				<header class="modalheader">
+			<div class="modal" role="dialog" aria-labelledby="modaltitle">
+				<div class="modalheader">
           <h2 id="modaltitle" class = "modalheader__title">Contactez-moi</h2>
           <img class= "modalheader__close" src="assets/icons/close.svg" alt="Fermer fenêtre de contact" aria-label="Fermer">
-        </header>
+        </div>
         <h3 class="modal__photographname"></h3>
 				<form class="contactdata" name="contactData" autocomplete="off" action="photographer.html" method="get">
 					<div class="formData">
@@ -103,8 +103,8 @@
         </button>
         <div class="light-content"> 
              <!-- Next/previous -->
-            <button type ="button" class="light-content-previous" aria-label="Média précédent">&#10094;</button>
-            <button type ="button" class="light-content-next" aria-label="Média suivant">&#10095;</button>
+            <button type ="button" role="button" class="light-content-previous" aria-label="Média précédent">&#10094;</button>
+            <button type ="button" role="button" class="light-content-next" aria-label="Média suivant">&#10095;</button>
         </div>
 		</div>
 

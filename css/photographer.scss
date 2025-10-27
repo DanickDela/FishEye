@@ -224,7 +224,7 @@ body {
     position: absolute; 
     top: 0; 
     left: 96px; 
-    z-index: 5;
+    z-index: 2;
     font-size: 18px; 
     line-height: 69px;
 
@@ -463,10 +463,11 @@ form div {
     display : none;
     position: fixed;
     background-color:white;
-    width: 1440px;
-    height: 1024px;
+    //width: 1440px;
+    max-width: 1440px;
+    //height: 1024px;
     inset: 0;
-    margin: 0;
+    margin: auto;
     padding-top: 1px;
     z-index: 120;
     &__close {

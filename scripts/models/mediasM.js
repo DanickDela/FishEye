@@ -13,6 +13,7 @@ class MediaInfo {
    * @param {number} media.likes - Nombre de likes.
    * @param {string} media.date - Date au format string
    * @param {number} media.price - Prix 
+   * @param {boolean} media.liked -  ’utilisateur a t'il liké cette carte ?
    */
 
     constructor(media) {
@@ -25,6 +26,7 @@ class MediaInfo {
         this._likes = media.likes;
         this._date = media.date; 
         this._price = media.price;
+        this._liked = false;
     }
 
     get idPhoto () { 
@@ -53,7 +55,18 @@ class MediaInfo {
     get likes() { 
         return this._likes; 
     }
-    set likes(v) { this._likes = v; }
+    set likes(v) {
+        this._likes = v; 
+    }
+    get liked() { 
+        return this._liked; 
+    }
+
+      /** Bascule like/unlike en respectant la règle “1 click = +1, re-click = -1” */
+    likeOnce() {
+    if (!this._liked) this._likes++, this._liked = true;
+        return { likes: this._likes, liked: this._liked };
+    }
 
     get price() { 
         return this._price; 

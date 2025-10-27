@@ -1,6 +1,6 @@
 
 import {getPhotographers, getPhotographIdfromURL}  from '../utils/getData.js';
-import {DefinePhotographerHeader } from "../templates/PhotograperHeader.js";
+import {DefinePhotographerHeader } from "../templates/PhotographerHeader.js";
 import {DefineMediaTemplate} from '../templates/MediaCard.js'
 import {lightBox} from '../utils/lightbox.js';
 import {sortBy} from '../utils/SortBy.js';
@@ -62,7 +62,7 @@ export const getPhotographer = async () => {
          photographName.setAttribute ('aria-label', 'Nom du photographe: ${name}');
 
         //Affichage du total de likes
-        displayLike();
+        displayLike(medias);
 
         //Activation du tri
         sortBy ();

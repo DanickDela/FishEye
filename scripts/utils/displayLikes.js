@@ -1,63 +1,101 @@
-export const displayLike= () => {
+/**
+ * Met en place la gestion des likes pour chaque média,
+ * et met à jour le total en temps réel à partir du modèle `MediaInfo`.
+ *
+ * @param {Array<MediaInfo>} medias - Tableau des modèles médias contenant au moins
+ *                                    `idPhoto`, `likes`, `liked`, et une méthode `likeOnce()`.
+ */
+export const displayLike = (medias) => {
 
     // Element nombre de likes
     const likeTotal= document.querySelector('.display__like-total');
 
-    // Tous les compteurs de like dans les cartes
-    const slidesLike= Array.from(document.querySelectorAll('.mediascardcontent__like-nblike'));
-    let sum= 0;
-
-
-    slidesLike.forEach((slide) => {
-        sum+= parseInt(slide.textContent,10);
-    });
-
-    likeTotal.textContent = String(sum)
-    likeTotal.setAttribute('aria-label',`${sum} de like `);
-
-    const updateTotal = (update) => {
-        const n = parseInt(likeTotal.textContent || '0', 10) + update;
-        likeTotal.textContent = String(n);
-        likeTotal.setAttribute('aria-label', `Nombre total de likes ${n}`);
+    const computeTotal = () => medias.reduce((acc, m) => acc + m.likes, 0);
+    const setTotal = (n) => {
+    likeTotal.textContent = String(n);
+    likeTotal.setAttribute('aria-label', `Nombre total de likes ${n}`);
     };
+     // Initialisation de l'affichage du total
+     setTotal(computeTotal());
+
+    // index par photo
+    const byIdPhoto = new Map(medias.map(m => [String(m.idPhoto), m]));
 
     // écoute des clics sur chaque bloc like
     const likesPhoto = Array.from(document.querySelectorAll('.mediascardcontent__like'));
 
-    likesPhoto.forEach((likep)=> {
-        const counter = likep.querySelector('.mediascardcontent__like-nblike');
-        const solidHeart = likep.querySelector('.fa-solid.fa-heart')
-        const regularHeart = likep.querySelector('.fa-regular.fa-heart')
-  
-        // état initial : on affiche le regular, on cache le solid
-        solidHeart?.classList.add('is-hidden');
+     // Liste des blocs de like à interagir (vue)
+    likesPhoto.forEach((like) => {
+        const id = like.dataset.id;    
+        const model = byIdPhoto.get(String(id));          
+        if (!model) return;
 
-        const toggleLike = () => {
-            const current = parseInt(counter.textContent || '0', 10);
-            const liked = !solidHeart?.classList.contains('is-hidden');
+        const counter = like.querySelector('.mediascardcontent__like-nblike');
+        const likeBtn = like.querySelector('.mediascardcontent__like-btn');
+        const solid   = like.querySelector('.fa-solid.fa-heart');
+        const regular = like.querySelector('.fa-regular.fa-heart');
 
-            // toggle affichage icônes
-            solidHeart?.classList.toggle('is-hidden');
-            regularHeart?.classList.toggle('is-hidden');
+        // état visuel initial selon model.liked (par défaut false)
+        if (model.liked) {
+            solid?.classList.remove('is-hidden');
+            regular?.classList.add('is-hidden');
+        } 
+        else 
+        {
+            solid?.classList.add('is-hidden');
+            regular?.classList.remove('is-hidden');
+        }
 
-            // maj compteur carte + total
-             if (liked) {
-                counter.textContent = String(current - 1);
-                updateTotal(-1);
-            } else {
-                counter.textContent = String(current + 1);
-                updateTotal(1);
+        // bouton accessible : on utilise le bloc comme bouton 
+        likeBtn.setAttribute('role', 'button');
+        likeBtn.setAttribute('tabindex', '0');
+        likeBtn.setAttribute('aria-pressed', String(model.liked));
+        likeBtn.setAttribute('aria-label', `Aimer ${model.liked ? '(déjà aimé)' : ''}`);
+
+         /**
+         * Met à jour la vue (coeur + compteur local + compteur total)
+         * selon l'état actuel du modèle.
+         */
+        const  applyView =() =>  {
+            // met à jour l’affichage à partir du modèle
+            counter.textContent = String(model.likes);
+            like.setAttribute('aria-pressed', String(model.liked));
+            if (model.liked) {
+                solid?.classList.remove('is-hidden');
+                regular?.classList.add('is-hidden');
             }
+            else
+            {
+                solid?.classList.add('is-hidden');
+                regular?.classList.remove('is-hidden');
+            }
+            setTotal(computeTotal());
         };
-        //on écoute le clic sur tout le bloc like (ou cible l’icône si tu préfères)
-        likep.addEventListener('click', e => {
-            if (!e.target.closest('.fa-heart')) return;
-                console.log("clicksolid")
-                toggleLike();
-
-         }); 
-    });     
-}
        
-        
+         /**
+     * Action de like (définitif, via model.likeOnce()) puis mise à jour de la vue.
+     */
+        const toggle = () => {
+            model.likeOnce(); // ← logique centralisée
+            applyView();
+        };
+
+        // Click sur le cœur ou le bloc
+        like.addEventListener('click', (e) => {
+            const isHeart = e.target.closest?.('.fa-heart');
+            if (!isHeart) return;
+            toggle();
+        });
+
+        // Clavier (Espace/Entrée)
+        like.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+              toggle();
+        }
+    });
+
+    });
+       
+};      
     

@@ -28,6 +28,7 @@ export function DefineMediaTemplate (media) {
     if (media.isImage) {
         visual = document.createElement('img');
         visual.src = url;
+        visual.dataset.id = String(media.idPhoto);
         visual.alt = `Aperçu de la photo : ${media.title}`;
         visual.classList.add('mediascard__link__image');
         //mediaCard.setAttribute('aria-label', `photo représentant : ${media.title}`);
@@ -36,6 +37,7 @@ export function DefineMediaTemplate (media) {
         visual= document.createElement('video');
         visual.src = url;
         visual.alt = `Extrait de la vidéo : ${media.title}`; 
+        visual.dataset.id = String(media.idPhoto);
         visual.classList.add('mediascard__link__video');
         //mediaCard.setAttribute('aria-label', `vidéo de : ${media.title}`);
     }
@@ -56,20 +58,20 @@ export function DefineMediaTemplate (media) {
 
     const like= document.createElement ('div');
     like.classList.add('mediascardcontent__like');
+    like.dataset.id = String(media.idPhoto);
 
     contentMediaCard.appendChild(like);
 
     const nbLikeCard= document.createElement ('span');
     nbLikeCard.textContent = `${media.likes}`;
     nbLikeCard.classList.add('mediascardcontent__like-nblike');
-    nbLikeCard.setAttribute('aria-label', `Nombre de likes : ${media.likes}`);
     like.appendChild(nbLikeCard);
 
     const likeHeart= document.createElement ('div');
     likeHeart.classList.add('mediascardcontent__like-btn');
     like.appendChild(likeHeart);
 
-        // Créer les deux icônes
+    // Créer les deux icônes
     const heartRegular = document.createElement('i');
     heartRegular.classList.add('fa-regular', 'fa-heart');
     likeHeart.appendChild(heartRegular);

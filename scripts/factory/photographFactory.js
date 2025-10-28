@@ -11,18 +11,18 @@ const ModelFactory = {
    *
    * @function
    * @name ModelFactory.DisplayPhotographer
-   * @param {Object} data - Objet contenant les données du photographe.
+   * @param {object} data - Objet contenant les données du photographe.
    * @returns {PhotographerInfo} Une instance de `PhotographerInfo`
    */
   DisplayPhotographer(data) {
     return new PhotographerInfo(data);
   },
-    /**
+  /**
    * Crée un modèle `MediaInfo` à partir de données brutes.
    *
    * @function
    * @name ModelFactory.DisplayMedia
-   * @param {Object} data - Objet contenant les données du média.
+   * @param {object} data - Objet contenant les données du média.
    * @returns {MediaInfo} Une instance de `MediaInfo`.
    */
   DisplayMedia(data) {

@@ -108,17 +108,17 @@ export const lightBox = {
     });
 
     // Fermer 
-    closeBtn.addEventListener("click", (e) => {
+    closeBtn.addEventListener("click", () => {
         closeModal();
     });
 
 
     // Navigation (si tu as .prev / .next dans le HTML)
-    previousSlide.addEventListener("click", (e) => {
+    previousSlide.addEventListener("click", () => {
         show(current - 1);
     });
 
-    nextSlide.addEventListener("click", (e) => {
+    nextSlide.addEventListener("click", () => {
         show((current + 1));
     });
 

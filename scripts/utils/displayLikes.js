@@ -52,7 +52,7 @@ export const displayLike = (medias) => {
         likeBtn.setAttribute('aria-pressed', String(model.liked));
         likeBtn.setAttribute('aria-label', `Aimer ${model.liked ? '(déjà aimé)' : ''}`);
 
-         /**
+        /**
          * Met à jour la vue (coeur + compteur local + compteur total)
          * selon l'état actuel du modèle.
          */
@@ -72,9 +72,9 @@ export const displayLike = (medias) => {
             setTotal(computeTotal());
         };
        
-         /**
-     * Action de like (définitif, via model.likeOnce()) puis mise à jour de la vue.
-     */
+        /**
+         * Action de like (définitif, via model.likeOnce()) puis mise à jour de la vue.
+         */
         const toggle = () => {
             model.likeOnce(); // ← logique centralisée
             applyView();

@@ -14,12 +14,12 @@ export const photographersTemplate = (data) => {
     const picture = `assets/photographers/${portrait}`;
 
     /**
-    **
-    * @returns {HTMLElement} L’élément `<article>` complet prêt à être inséré dans le DOM.
-    *
-    * @description
-    *   * Construit et retourne l’élément DOM représentant la liste des photographes
-    */
+     **
+     * @returns {HTMLElement} L’élément `<article>` complet prêt à être inséré dans le DOM.
+     *
+     * @description
+     *   * Construit et retourne l’élément DOM représentant la liste des photographes
+     */
     const getUserCardDOM = () => {
         
         const article = document.createElement( 'article' );

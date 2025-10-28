@@ -1,10 +1,11 @@
-
+/**
+ * Représente un média (image ou vidéo)
+ */
 class MediaInfo {
-
   /**
    * Crée une instance de MediaInfo.
    * 
-   * @param {Object} media - Données brutes provenant du JSON.
+   * @param {object} media - Données brutes provenant du JSON.
    * @param {number} media.id - Identifiant unique du média.
    * @param {number} media.photographerId - Identifiant du photographe à partir de photographers.
    * @param {string} media.title - Titre du média.
@@ -15,7 +16,6 @@ class MediaInfo {
    * @param {number} media.price - Prix 
    * @param {boolean} media.liked -  ’utilisateur a t'il liké cette carte ?
    */
-
     constructor(media) {
         this._id = media.id;
         this._photographerId = media.photographerId;
@@ -28,57 +28,102 @@ class MediaInfo {
         this._price = media.price;
         this._liked = false;
     }
-
+    /**
+     * Identifiant du média.
+     * @returns {number}
+     */
     get idPhoto () { 
         return this._id; 
     }
 
+    /**
+     * Identifiant du photographe
+     * @returns {number}
+     */
     get photographerId() { 
         return this._photographerId; 
     }
 
     /**
-    * Définit le nom du photographe associé.
-    * @param {string} name - Nom complet du photographe.
-    */
+     * Définit le nom du photographe associé.
+     * @param {string} name - Nom complet du photographe.
+     */
     set photographername(name) {
         this._photographername = name;
     }
 
+    /**
+     * Nom du photographe
+     * @returns {string}
+     */
     get photographername() {
         return this._photographername; 
     }
 
+    /**
+     * Titre du média.
+     * @returns {string}
+     */
     get title() { 
         return this._title; 
     }
+
+    /**
+     * Nombre de likes courant.
+     * @returns {number}
+     */
     get likes() { 
         return this._likes; 
     }
+    /**
+     * Metre à jour le nombre de likes.
+     * @param {number} v - Nouveau nombre de likes.
+     */
     set likes(v) {
         this._likes = v; 
     }
+    /**
+     * Indique si l’utilisateur a déjà liké ce média.
+     * @returns {boolean}
+     */
     get liked() { 
         return this._liked; 
     }
 
-      /** Bascule like/unlike en respectant la règle “1 click = +1, re-click = -1” */
+    /**
+     * Applique un like une seule fois (1 clic = +1) si pas déjà liké.
+     * @returns {{likes: number, liked: boolean}} État après action.
+     */
     likeOnce() {
     if (!this._liked) this._likes++, this._liked = true;
         return { likes: this._likes, liked: this._liked };
     }
-
+    /**
+     * Prix du média.
+     * @returns {number}
+     */
     get price() { 
         return this._price; 
     }
-
+    /**
+     * Vrai si le média est une image.
+     * @returns {boolean}
+     */
     get isImage() { 
         return Boolean(this._image); 
     }
+    /**
+     * Vrai si le média est une video.
+     * @returns {boolean}
+     */
     get isVideo() { 
         return Boolean(this._video); 
     }
 
+    /**
+     * URL relative du média (image ou vidéo), sinon chaîne vide.
+     * @returns {string}
+     */
     get urlMedia() {
         if (this.isImage) return `${this._image}`;
         if (this.isVideo) return `${this._video}`;
@@ -86,9 +131,9 @@ class MediaInfo {
     }
 
     /**
-    * Retourne une date valide ou null.
-    * @returns {Date|null} Date valide ou null si non valide.
-    */
+     * Retourne une date valide ou null.
+     * @returns {Date|null} Date valide ou null si non valide.
+     */
     get formatDate() {
 
         //vérifie si la date est valide
@@ -97,8 +142,12 @@ class MediaInfo {
 
         return DateValid;
     } 
+    /**
+     * Date brute (string) telle que fournie par la source.
+     * @returns {string}
+     */
     get date () {
-          return this._date; 
+        return this._date; 
     }
 
 }

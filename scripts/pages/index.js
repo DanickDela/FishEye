@@ -1,7 +1,7 @@
 import {photographersTemplate} from '../templates/photographersDisplay.js'  
 import {getPhotographers} from '../utils/getData.js'
 
-/**********************************************************************************
+/**
  * Type représentant un photographe.
  * @typedef {object} Photographer
  * @property {string} name - Nom du photographe.
@@ -13,7 +13,7 @@ import {getPhotographers} from '../utils/getData.js'
  * @property {number} price - Tarif journalier.
  */
 
-/**********************************************************************************
+/**
  * Affiche la liste des photographes sur la page d'accueil.
  *
  * @async
@@ -43,8 +43,7 @@ async function displayData(photographers) {
     });
 }
 
-
-/**********************************************************************************
+/**
  * Initialise la page d'accueil :
  * - Récupère et affiche les données des photographes
  * @async
@@ -55,7 +54,7 @@ async function displayData(photographers) {
  *  Récupère et affiche les données des photographes.
  *  Affiche tous les photographes sur la page
  */
- async function init() {
+async function init() {
     // Récupère les datas des photographes
     const { photographers } = await getPhotographers();
 

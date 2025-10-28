@@ -12,10 +12,11 @@ const message = document.getElementById("message");
 const closeBtn = document.querySelector(".modalheader__close");
 const contactBtn = document.querySelector(".contact_button");
 
-/*************************************************************
+/**
  * Cette fonction affiche les erreurs de saisie
  * @param {string} inputId : Id du champ input
  * @param {string} message : messessage d'erreur à afficher
+ * @returns {void}
  */
 function displayError(inputId, message) {
 
@@ -27,9 +28,10 @@ function displayError(inputId, message) {
 
 }
 
-/*************************************************************
+/**
  * Cette fonction supprime l'affiche des erreurs lors de la saisie
- *  @param {boolean} notInput : true un balide, false balise textarea 
+ *  @param {boolean} inputId : true un balide, false balise textarea 
+ *  @returns {void}
  */
 function hideError(inputId) {
 
@@ -41,10 +43,11 @@ function hideError(inputId) {
 }
 
 
-/*************************************************************
-* Cette fonction valide le nom ou le prénom
-* @param {objet} balise : objet DOM
-*/
+/**
+ * Valide un prénom/nom : au moins 2 caractères non vides.
+ * @param {HTMLInputElement} balise - Champ à valider.
+ * @returns {boolean} true si valide, sinon false.
+ */
 function firstlastNameValidate (balise) {
 
    if ((balise.value.trim() === "") || (balise.value.trim().length < 2)) { 
@@ -58,9 +61,10 @@ function firstlastNameValidate (balise) {
     }
 }
 
-/*************************************************************
- * Cette fonction vérifie la validité de l'émail
- *  @param {objet} balise : objet DOM
+/**
+ * Valide un prénom/nom : au moins 2 caractères non vides.
+ * @param {HTMLInputElement} balise - Champ à valider.
+ * @returns {boolean} true si valide, sinon false.
  */
 function EmailValidate(balise) {
 
@@ -75,9 +79,10 @@ function EmailValidate(balise) {
     }
 }
 
-/*************************************************************
- * Cette fonction vérifie la logueur max de caractères
- *  @param {objet} balise : objet DOM
+/**
+ * Valide le message : 1 à 255 caractères non vides.
+ * @param {HTMLTextAreaElement} balise - Zone de texte à valider.
+ * @returns {boolean} true si valide, sinon false.
  */
 const messageValidate = (balise) =>{
 
@@ -92,7 +97,7 @@ const messageValidate = (balise) =>{
     }
 }
 
-/*
+/**
  * Affiche la fenêtre modale du formulaire de contact.
  * Met automatiquement le focus sur le premier champ (prénom).
  */
@@ -120,12 +125,6 @@ export const closeModal = () => {
 // ============================================================
 // Écouteurs d'événements et validation en temps réel
 // ============================================================
-
-
-//Validation du prénom
-// firstName.addEventListener("blur", ()=>{
-//     firstlastNameValidate (firstName);
-// })
 
 if (firstName) {
     firstName.addEventListener("blur", () => {

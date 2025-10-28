@@ -10,7 +10,6 @@ export const sortBy = (medias) => {
  
     const menu = document.getElementById("sortMenu");
     const sortOptions = menu.querySelectorAll(".sort__option");
-    const mediascard = document.querySelectorAll(".mediascard");
     const mediaPhotographer = document.querySelector(".media-photographer");
     const sortPopularity = menu.querySelector(".sort__popularity");
     const sortDate = menu.querySelector(".sort__date");
@@ -25,8 +24,8 @@ export const sortBy = (medias) => {
     sortTitle.style.display = "none";
   
     /**
-    * Ouvre/ferme l'affichage des choix de tri
-    */
+     * Ouvre/ferme l'affichage des choix de tri
+     */
     mediaSort.addEventListener('click', () => {
         const open = !mediaSort.classList.contains('is-open');
         mediaSort.classList.toggle('is-open', open);
@@ -48,8 +47,8 @@ export const sortBy = (medias) => {
     });
 
     /**
-    * Gère l’affichage visuel du bouton sélectionné
-    */
+     * Gère l’affichage visuel du bouton sélectionné
+     */
     sortOptions.forEach((select) => {
         select.addEventListener("click", () => {
             const selection = select.textContent.trim().toLowerCase();
@@ -84,8 +83,8 @@ export const sortBy = (medias) => {
     });
 
     /**
-    * Accessibilité : activation au clavier
-    */
+     * Accessibilité : activation au clavier
+     */
     sortOptions.forEach((option) => {
         option.addEventListener("keydown", (e) => {
             if (e.key ==="Enter" || e.keyCode === 13) {
@@ -96,8 +95,8 @@ export const sortBy = (medias) => {
 
 
     /**
-    * TRI → à partir du modèle `medias` et non du DOM
-    */
+     * TRI → à partir du modèle `medias` et non du DOM
+     */
     sortOptions.forEach((op) => {
     op.addEventListener("click", () => {
         const selection = op.textContent.trim().toLowerCase();

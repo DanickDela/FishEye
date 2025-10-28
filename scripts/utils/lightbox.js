@@ -11,7 +11,7 @@ export const lightBox = {
         const closeBtn=document.querySelector(".lightbox__close");
 
         // Variable pour mémoriser le focus avant ouverture
-        let lastFocus=null;
+        let lastFocuslight=null;
 
         const buildSlides = () => {
         
@@ -76,7 +76,8 @@ export const lightBox = {
       current = i;
     };
 
-    const displayModal = () => {
+    const displayModalightBox = () => {
+        lastFocuslight = document.activeElement;
         mainContainer.inert=true;
         modalLightbox.style.display = 'block';
         modalLightbox.inert=false;
@@ -85,12 +86,12 @@ export const lightBox = {
     };
     
 
-    const closeModal = () => {
-        lastFocus.focus();
+    const closeModallightBox = () => {
         mainContainer.inert=false;
         modalLightbox.inert=true;
         document.body.classList.remove('no-scroll');
-        modalLightbox.style.display = "none";;
+        modalLightbox.style.display = "none";
+        lastFocuslight.focus();
     };
     
 
@@ -98,9 +99,8 @@ export const lightBox = {
     photolinks.forEach((link, index) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
-        lastFocus=e.currentTarget;
         buildSlides();            // créer toutes les slides
-        displayModal();
+        displayModalightBox();
         closeBtn.focus();
         show(index);              // montre le slide cliquée
 
@@ -109,7 +109,7 @@ export const lightBox = {
 
     // Fermer 
     closeBtn.addEventListener("click", () => {
-        closeModal();
+        closeModallightBox();
     });
 
 
@@ -125,13 +125,15 @@ export const lightBox = {
     document.addEventListener('keydown', (e) => {
     switch (e.key) {
         case 'ArrowRight':
+            nextSlide.focus();
             show((current + 1));
         break;
         case 'ArrowLeft':
+            previousSlide.focus();
             show((current - 1));
         break;
         case 'Escape':
-            if (!modalLightbox.inert) closeModal();
+            if (!modalLightbox.inert) closeModallightBox();
         break;
 
       default:

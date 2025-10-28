@@ -21,27 +21,27 @@
     <main id="main-wrapper" class="main-container">
       <section class="photograph-display"></section>
   
-      <div class="mediasort">
-          <h2 class="mediasort__title" aria-label="Trier les médias">Trier par :</h2>
+      <nav class="mediasort">
+          <h2 class="mediasort__title">Trier par :</h2>
           <button class="mediasort__btn" id="dropdownBtn" aria-label="Déplier le menu de tri" aria-expanded="false">
               <i class="fa-solid fa-chevron-down"></i>
              <i class="fa-solid fa-chevron-up"></i>
           </button>
 
-          <div class="sort" id="sortMenu" aria-label="Trier par">
-            <div class="sort__popularity sort__option" tabindex="0" aria-label="Trier les résultats par">Popularité</div>
-            <div class="sort__date sort__option" tabindex="0" aria-label="Trier les résultats">Date</div>
-            <div class="sort__title sort__option" tabindex="0" aria-label="Trier les résultats par">Titre</div>
-          </div>
-      </div> 
+          <ul class="sort" id="sortMenu" role="listbox">
+            <li role="option" class="sort__popularity sort__option" aria-selected="true">Popularité</li>
+            <li role="option" class="sort__date sort__option" aria-selected="true">Date</li>
+            <li role="option" class="sort__title sort__option" aria-selected="true">Titre</li>
+          </ul>
+        </nav> 
 
       <!-- Affiche tous les médias d'un photographe -->
       <section class="media-photographer"></section>
 
     </main>
 
-    <!-- fenêtre modal contatez-moi -->
-    <div id="contact_modal">
+    <!-- fenêtre modal contactez-moi -->
+    <div  id="contact_modal">
 			<div class="modal" role="dialog" aria-labelledby="modaltitle">
 				<div class="modalheader">
           <h2 id="modaltitle" class = "modalheader__title">Contactez-moi</h2>

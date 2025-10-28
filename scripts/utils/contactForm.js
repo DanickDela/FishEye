@@ -9,8 +9,28 @@ const firstName = document.getElementById("first");
 const lastName = document.getElementById("last");
 const Email = document.getElementById("email");
 const message = document.getElementById("message");
-const closeBtn = document.querySelector(".modalheader__close");
+const closecontactBtn = document.querySelector(".modalheader__close");
 const contactBtn = document.querySelector(".contact_button");
+
+let lastFocus=null;
+
+
+/**
+ * Supprime tous les messages d’erreur affichés dans le formulaire de contact.
+ *
+ * Réinitialise sur chaque .formData :
+ * - l’attribut `data-error` (message d’erreur)
+ * - l’attribut `data-error-visible` à "false" (masque l’affichage de l’erreur)
+ *
+ * @returns {void}
+ */
+function clearAllErrors() {
+    form.querySelectorAll('.formData').forEach((err) => {
+        err.removeAttribute('data-error');
+        err.setAttribute('data-error-visible', 'false');
+     });
+}
+
 
 /**
  * Cette fonction affiche les erreurs de saisie
@@ -102,24 +122,31 @@ const messageValidate = (balise) =>{
  * Met automatiquement le focus sur le premier champ (prénom).
  */
 export const displayModal = () => {
+
+     // mémorise l’élément qui avait le focus au moment de l’ouverture
+    lastFocus = document.activeElement;
+
+    // Nettoyer les erreurs précédentes
+    clearAllErrors()
+
     mainContainer.inert=true;
     modal.style.display = 'block';
     modal.inert=false;
     document.body.classList.add('no-scroll');
-    closeBtn.focus();
+    closecontactBtn.focus();
 };
 
 /**
  * Ferme la fenêtre modale de contact.
  */
-export const closeModal = () => {
-
-    contactBtn.focus();
+    const closeModal = () => {
+    form.reset(); //vide le formulaire
+    modal.style.display = "none";
     mainContainer.inert=false;
     modal.inert=true;
     document.body.classList.remove('no-scroll');
-    modal.style.display = "none";;
-    form.reset(); //vide le formulaire
+
+    lastFocus.focus();
 };
 
 // ============================================================
@@ -155,9 +182,9 @@ message.addEventListener("blur", ()=>{
 })
 }
 
-if (closeBtn) {
+if (closecontactBtn) {
 // Fermeture de la fenêtre modale contenant le formulaire ou les remerciements
-closeBtn.addEventListener("click", () => { 
+closecontactBtn.addEventListener("click", () => { 
     closeModal();
 });
 }

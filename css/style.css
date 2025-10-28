@@ -20,11 +20,13 @@ header {
 h1 {
   color: #901C1C;
   margin-right: 100px;
+  margin-top: 44px;
 }
 
 .logo {
   height: 50px;
   margin-left: 100px;
+  margin-top: 42px;
 }
 
 .photographer {

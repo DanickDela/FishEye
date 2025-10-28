@@ -81,7 +81,7 @@ export function DefinePhotographerHeader (photographer) {
     const  PricePerDay= document.createElement( 'p' );
     PricePerDay.classList.add("display__priceday");
     PricePerDay.textContent = `${photographer.price}€ / jour`;
-    //PricePerDay.setAttribute('aria-label', `Tarif du photographe à la journée : ${photographer.price}€`);
+    PricePerDay.setAttribute('aria-label', `Tarif du photographe à la journée`);
     display.appendChild(PricePerDay);
 
 return photographHeader;

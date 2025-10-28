@@ -31,7 +31,7 @@ export const sortBy = (medias) => {
         mediaSort.classList.toggle('is-open', open);
 
         if (open){
-          // ouvrir : montrer toutes les options
+        //   ouvrir : montrer toutes les options
             sortPopularity.style.display = "block";
             sortTitle.style.display = "block";
             sortDate.style.display = "block";
@@ -53,7 +53,7 @@ export const sortBy = (medias) => {
         select.addEventListener("click", () => {
             const selection = select.textContent.trim().toLowerCase();
 
-            //Réinitialiser les états avant de définir le bon
+            // Réinitialiser les états avant de définir le bon
             sortOptions.forEach((opt) => opt.classList.remove("active"));
             sortTitle.style.display = "none";
             sortPopularity.style.display = "none";
@@ -115,15 +115,15 @@ export const sortBy = (medias) => {
 
                 case "titre":
                     sortedMedias.sort((a, b) =>
-                        //FR :Parce qu’en français, É / É doivent être triés comme E
-                        //Ne pas faire la différence entre : é / e / è / ê (accents ignorés)
+                    //     FR :Parce qu’en français, É / É doivent être triés comme E
+                    //     Ne pas faire la différence entre : é / e / è / ê (accents ignorés)
                         a.title.localeCompare(b.title, "fr", { sensitivity: "base" })
                     );
                 break;
             }
 
-            //On réordonne le DOM en suivant l’ordre des modèles triés
-            //Construire toutes les cartes hors écran
+            // On réordonne le DOM en suivant l’ordre des modèles triés
+            // Construire toutes les cartes hors écran
             const tempDom = document.createDocumentFragment();
                 sortedMedias.forEach((media) => {
                     const card = document.querySelector(`.mediascard[data-id="${media.idPhoto}"]`);

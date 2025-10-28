@@ -35,7 +35,7 @@ export const photographersTemplate = (data) => {
         const img = document.createElement( 'img' );
         img.classList.add("photographer-card__image");
         img.src=picture;
-        img.alt ='Photo de ' + name;
+        img.alt ='';
 
         linkPhotographer.appendChild(img);
 

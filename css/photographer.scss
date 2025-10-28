@@ -123,10 +123,11 @@ body {
 .mediasort {
     display: flex;
     flex-direction: row;
-    gap: 22px;
+    align-items: first baseline;
     position: relative;
-    margin-top: 20px;
-    z-index: 10;
+    margin-top: 5px;
+    margin-bottom: 26px;
+    z-index: 26;
 
     &__title {
         height: 69px;
@@ -146,7 +147,7 @@ body {
         display: flex; 
         align-items: center; 
         justify-content: center;
-        z-index: 10; 
+        z-index: 60; 
         background-color: #901C1C;
         border: 0; 
         cursor: pointer;
@@ -223,13 +224,14 @@ body {
 }
 
 .sort {
-    position: absolute; 
-    top: 0; 
-    left: 96px; 
-    z-index: 2;
+    position: absolute;   // ← indispensable pour chevaucher
+    top: 0;               // aligne en haut de .mediasort
+    left: 96px;          // aligne sur ton bouton actuel
+    z-index: 50;
     font-size: 18px; 
     line-height: 69px;
-
+    padding-left: 0px;
+    margin: 0;
     &__option {
         position: relative; 
         cursor: pointer;
@@ -258,8 +260,8 @@ body {
 #contact_modal {
   display: none;
   position: fixed;
-  top: 62px;
-  left: 385px;
+  top:0; right:0; bottom:0; left:0;
+  margin: 69px auto;
   width: 669px;
   height: 900px;
   z-index: 1000;
@@ -364,9 +366,10 @@ form div {
 .media-photographer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    margin: 30px 0px 0px 0px;
+    margin: 0;
     gap: 10px 93px;
     min-width: 0;
+    z-index: 1;
 
   .mediascard {
     width:100%;
@@ -465,9 +468,7 @@ form div {
     display : none;
     position: fixed;
     background-color:white;
-    //width: 1440px;
     max-width: 1440px;
-    //height: 1024px;
     inset: 0;
     margin: auto;
     padding-top: 1px;

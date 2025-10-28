@@ -64,6 +64,7 @@ export function DefineMediaTemplate (media) {
     const nbLikeCard= document.createElement ('span');
     nbLikeCard.textContent = `${media.likes}`;
     nbLikeCard.classList.add('mediascardcontent__like-nblike');
+    nbLikeCard.setAttribute('aria-label', `Nombre de like`);
     like.appendChild(nbLikeCard);
 
     const likeHeart= document.createElement ('div');

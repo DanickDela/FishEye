@@ -121,10 +121,11 @@ body {
 .mediasort {
   display: flex;
   flex-direction: row;
-  gap: 22px;
+  align-items: first baseline;
   position: relative;
-  margin-top: 20px;
-  z-index: 10;
+  margin-top: 5px;
+  margin-bottom: 26px;
+  z-index: 26;
   /* === Menu fermé : ne montrer que l’active, sans trait === */
   /* === Menu ouvert : tout afficher + traits === */
 }
@@ -145,7 +146,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  z-index: 60;
   background-color: #901C1C;
   border: 0;
   cursor: pointer;
@@ -214,9 +215,11 @@ body {
   position: absolute;
   top: 0;
   left: 96px;
-  z-index: 2;
+  z-index: 50;
   font-size: 18px;
   line-height: 69px;
+  padding-left: 0px;
+  margin: 0;
 }
 .sort__option {
   position: relative;
@@ -242,8 +245,11 @@ body {
 #contact_modal {
   display: none;
   position: fixed;
-  top: 62px;
-  left: 385px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 69px auto;
   width: 669px;
   height: 900px;
   z-index: 1000;
@@ -341,9 +347,10 @@ form div {
 .media-photographer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  margin: 30px 0px 0px 0px;
+  margin: 0;
   gap: 10px 93px;
   min-width: 0;
+  z-index: 1;
 }
 .media-photographer .mediascard {
   width: 100%;

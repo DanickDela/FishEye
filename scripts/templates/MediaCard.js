@@ -17,6 +17,7 @@ export function DefineMediaTemplate (media) {
     const mediaCard = document.createElement('article');
     mediaCard.classList.add('mediascard');
     mediaCard.setAttribute('date', media.date);
+    mediaCard.dataset.id = String(media.idPhoto);
     
     const linkMediaCard = document.createElement('a');
     linkMediaCard.classList.add('mediascard__link');
@@ -28,7 +29,6 @@ export function DefineMediaTemplate (media) {
     if (media.isImage) {
         visual = document.createElement('img');
         visual.src = url;
-        visual.dataset.id = String(media.idPhoto);
         visual.alt = `Aperçu de la photo : ${media.title}`;
         visual.classList.add('mediascard__link__image');
         //mediaCard.setAttribute('aria-label', `photo représentant : ${media.title}`);
@@ -37,7 +37,6 @@ export function DefineMediaTemplate (media) {
         visual= document.createElement('video');
         visual.src = url;
         visual.alt = `Extrait de la vidéo : ${media.title}`; 
-        visual.dataset.id = String(media.idPhoto);
         visual.classList.add('mediascard__link__video');
         //mediaCard.setAttribute('aria-label', `vidéo de : ${media.title}`);
     }

@@ -22,9 +22,7 @@ export const lightBox = {
                 const href  = link.getAttribute("href");
                 const title = link.getAttribute("title")
                             || link.querySelector("img,video")?.getAttribute("alt")
-                            || "";
-
-        
+                            || "";       
 
                 const divSlide = document.createElement('div');
                 divSlide.className = 'light-content__slide';

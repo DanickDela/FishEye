@@ -65,7 +65,7 @@ export const getPhotographer = async () => {
         displayLike(medias);
 
         //Activation du tri
-        sortBy ();
+        sortBy (medias);
 
         // attendre que les images des cartes soient chargées 
         //Initialisation lightbox 

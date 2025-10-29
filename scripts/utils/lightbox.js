@@ -8,7 +8,9 @@ export const lightBox = {
         const photolinks = Array.from(document.querySelectorAll(".mediascard__link"));
         const previousSlide=document.querySelector(".light-content-previous");
         const nextSlide=document.querySelector(".light-content-next");
-        const closeBtn=document.querySelector(".lightbox__close");
+        const closeBtnlightBox=document.querySelector(".lightbox__close");
+        const displayLikeLight=document.querySelector(".display");
+        
 
         // Variable pour mémoriser le focus avant ouverture
         let lastFocuslight=null;
@@ -78,11 +80,12 @@ export const lightBox = {
 
     const displayModalightBox = () => {
         lastFocuslight = document.activeElement;
+        displayLikeLight.style.display="none";
         mainContainer.inert=true;
         modalLightbox.style.display = 'block';
         modalLightbox.inert=false;
         document.body.classList.add('no-scroll');
-        closeBtn.focus();
+        closeBtnlightBox.focus();
     };
     
 
@@ -101,14 +104,14 @@ export const lightBox = {
         e.preventDefault();
         buildSlides();            // créer toutes les slides
         displayModalightBox();
-        closeBtn.focus();
+        closeBtnlightBox.focus();
         show(index);              // montre le slide cliquée
 
       });
     });
 
     // Fermer 
-    closeBtn.addEventListener("click", () => {
+    closeBtnlightBox.addEventListener("click", () => {
         closeModallightBox();
     });
 

@@ -469,6 +469,7 @@ form div {
     position: fixed;
     background-color:white;
     max-width: 1440px;
+    max-height: 1024px;
     inset: 0;
     margin: auto;
     padding-top: 1px;
@@ -483,7 +484,7 @@ form div {
         border: none;
         padding: 0;
         cursor: pointer;
-        color: #901C1C;                  // couleur du SVG (héritée)
+        color: #901C1C; 
         transition: color 0.3s ease;
     }
     .light-content {

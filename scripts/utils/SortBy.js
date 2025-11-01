@@ -26,24 +26,26 @@ export const sortBy = (medias) => {
     /**
      * Ouvre/ferme l'affichage des choix de tri
      */
-    mediaSort.addEventListener('click', () => {
-        const open = !mediaSort.classList.contains('is-open');
-        mediaSort.classList.toggle('is-open', open);
+    arrowUpdown.addEventListener('click', () => {
+        const open = !menu.classList.contains('is-open');
+        menu.classList.toggle('is-open', open);
 
         if (open){
         //   ouvrir : montrer toutes les options
             sortPopularity.style.display = "block";
             sortTitle.style.display = "block";
             sortDate.style.display = "block";
+            menu.focus();
+            arrowUpdown.setAttribute('aria-expanded', 'true');
         }
         else
         {
             // fermer : ne montrer que l’option active
+            arrowUpdown.setAttribute('aria-expanded', 'false');
             sortOptions.forEach((opt) => {
                 opt.style.display = opt.classList.contains("active") ? "block" : "none";
             });
         }
-      mediaSort.classList.toggle("is-open", open);
     });
 
     /**
@@ -54,26 +56,38 @@ export const sortBy = (medias) => {
             const selection = select.textContent.trim().toLowerCase();
 
             // Réinitialiser les états avant de définir le bon
-            sortOptions.forEach((opt) => opt.classList.remove("active"));
+            sortOptions.forEach((opt) => {
+                    opt.classList.remove("active");
+                    opt.setAttribute('aria-checked','false');
+
+            });
+
             sortTitle.style.display = "none";
             sortPopularity.style.display = "none";
             sortDate.style.display = "none";
-            arrowUpdown.classList.toggle("is-open", false);
+            menu.classList.toggle("is-open", false);
+            arrowUpdown.setAttribute('aria-expanded', 'false');
 
             switch (selection) {
                 case "titre":
                     sortTitle.style.display = "block";
                     sortTitle.classList.add("active");
+                    sortTitle.setAttribute('aria-checked','true');
+                    sortTitle.focus();
                 break;
 
                 case "date":
                     sortDate.style.display = "block";
                     sortDate.classList.add("active");
+                    sortDate.setAttribute('aria-checked','true');
+                    sortDate.focus();
                 break;
 
                 case "popularité":
                     sortPopularity.style.display = "block";
                     sortPopularity.classList.add("active");
+                    sortPopularity.setAttribute('aria-checked','true');
+                    sortPopularity.focus();
                 break;
 
                 default:
@@ -83,13 +97,21 @@ export const sortBy = (medias) => {
     });
 
     /**
-     * Accessibilité : activation au clavier
+     * Enter sur le bouton ouvre/ferme le menu de tri
      */
-    sortOptions.forEach((option) => {
-        option.addEventListener("keydown", (e) => {
-            if (e.key ==="Enter" || e.keyCode === 13) {
-            option.click()
-            } 
+    arrowUpdown.addEventListener("keydown", (e) => {
+        if (e.key ==="Enter" || e.keyCode === 13) {
+            e.preventDefault()
+            arrowUpdown.click();
+        }
+    });
+
+
+    let listOptions = Array.from(sortOptions);
+    // --- clavier dans la listbox
+    listOptions.forEach((opt) => {
+        opt.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); opt.click(); }
         });
     });
 

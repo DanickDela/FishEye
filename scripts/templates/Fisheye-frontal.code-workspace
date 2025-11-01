@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../../Design pattern"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Fisheye-frontal"
+	}
+}

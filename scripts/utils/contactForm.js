@@ -2,6 +2,7 @@
 // ============================================================
 // Gestion de la fenêtre modale de contact
 // ============================================================
+const Header=document.getElementById('header');
 const mainContainer =  document.getElementById("main-wrapper");
 const modal = document.getElementById("contact_modal");
 const form = document.querySelector(".contactdata");
@@ -13,7 +14,6 @@ const closecontactBtn = document.querySelector(".modalheader__close");
 const contactBtn = document.querySelector(".contact_button");
 
 let lastFocus=null;
-
 
 /**
  * Supprime tous les messages d’erreur affichés dans le formulaire de contact.
@@ -125,10 +125,11 @@ export const displayModal = () => {
 
      // mémorise l’élément qui avait le focus au moment de l’ouverture
     lastFocus = document.activeElement;
+    window.modalOpen = true;
 
     // Nettoyer les erreurs précédentes
     clearAllErrors()
-
+    Header.inert=true;
     mainContainer.inert=true;
     modal.style.display = 'block';
     modal.inert=false;
@@ -139,13 +140,14 @@ export const displayModal = () => {
 /**
  * Ferme la fenêtre modale de contact.
  */
-    const closeModal = () => {
+const closeModal = () => {
+    window.modalOpen = false;
     form.reset(); //vide le formulaire
     modal.style.display = "none";
+    Header.inert=false;
     mainContainer.inert=false;
     modal.inert=true;
     document.body.classList.remove('no-scroll');
-
     lastFocus.focus();
 };
 
@@ -228,7 +230,7 @@ form.addEventListener("submit", (event) => {
 
 // Close modal when espace key is pressed
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !modal.inert) {
+    if (e.key === 'Escape' && !modal.inert && !window.lightboxOpen && mainContainer.inert) {
         closeModal();
   }
 });

@@ -1,8 +1,8 @@
 export const lightBox = {
-
     init () {
 
-        const mainContainer=document.getElementById('main-wrapper')
+        const Header=document.getElementById('header')
+        const mainContainerLightBox=document.getElementById('main-wrapper')
         const modalLightbox = document.querySelector(".lightbox");
         const lightContent = document.querySelector(".light-content");
         const photolinks = Array.from(document.querySelectorAll(".mediascard__link"));
@@ -14,6 +14,8 @@ export const lightBox = {
 
         // Variable pour mémoriser le focus avant ouverture
         let lastFocuslight=null;
+        //Comtepeur de slide
+        let iSlide=1
 
         const buildSlides = () => {
         
@@ -22,40 +24,41 @@ export const lightBox = {
 
             photolinks.forEach(link => {
                 const href  = link.getAttribute("href");
-                const title = link.getAttribute("title")
-                            || link.querySelector("img,video")?.getAttribute("alt")
-                            || "";       
+                const title = link.getAttribute("title");
+                               
 
-                const divSlide = document.createElement('div');
+                const divSlide = document.createElement('figure');
                 divSlide.className = 'light-content__slide';
-                divSlide.setAttribute("aria-label",`${title}`);
-
 
                   const firstChild = link.firstElementChild;
 
                 if (firstChild.tagName.toLowerCase() === 'img') {
                     const photoSlide = document.createElement('img');
                     photoSlide.className = 'light-content__slide__photo';
-                    photoSlide.alt = `Photo réprésentant : ${title}`;
+                    photoSlide.alt = title
                     photoSlide.src = href;
                     divSlide.appendChild(photoSlide);
+
                 } else if (firstChild.tagName.toLowerCase() === 'video') {
                     const videoSlide = document.createElement('video');
                     videoSlide.controls = true;          // pour pouvoir lire
                     videoSlide.preload = 'metadata';   
                     videoSlide.className = 'light-content__slide__video';
-                    videoSlide.alt = `Vidéo représentant : ${title}`;
                     videoSlide.src = href;
+                    videoSlide.setAttribute("aria-describedby",`light-content_slide_title_${iSlide}`);
                     divSlide.appendChild(videoSlide);
 
                 } else {
                     console.log("Type inconnu :", firstChild);
                 }
-
-                const titleSlide = document.createElement('h2');
+               
+                const titleSlide = document.createElement('figcaption');
                 titleSlide.className = 'light-content__slide__title';
+                titleSlide.id = `light-content_slide_title_${iSlide}`;
                 titleSlide.textContent = title;
                 divSlide.appendChild(titleSlide);
+
+                iSlide++;
 
                 // insérer avant le bouton "next" si présent, sinon à la fin
                 if (nextSlide) {
@@ -79,9 +82,11 @@ export const lightBox = {
     };
 
     const displayModalightBox = () => {
+        window.lightboxOpen = true;
         lastFocuslight = document.activeElement;
         displayLikeLight.style.display="none";
-        mainContainer.inert=true;
+        Header.inert=true;
+        mainContainerLightBox.inert=true;
         modalLightbox.style.display = 'block';
         modalLightbox.inert=false;
         document.body.classList.add('no-scroll');
@@ -90,10 +95,13 @@ export const lightBox = {
     
 
     const closeModallightBox = () => {
-        mainContainer.inert=false;
+        window.lightboxOpen = false;
+        mainContainerLightBox.inert=false;
+        Header.inert=false;
         modalLightbox.inert=true;
         document.body.classList.remove('no-scroll');
         modalLightbox.style.display = "none";
+        displayLikeLight.style.display="flex";
         lastFocuslight.focus();
     };
     
@@ -136,7 +144,7 @@ export const lightBox = {
             show((current - 1));
         break;
         case 'Escape':
-            if (!modalLightbox.inert) closeModallightBox();
+            if (!modalLightbox.inert &&  !modalOpen && mainContainerLightBox.inert)  closeModallightBox();
         break;
 
       default:

@@ -158,19 +158,30 @@ body {
             color: white; 
             background-color: #901C1C; 
         }
-        .fa-chevron-down { 
-            opacity: 1; 
-        }
-        .fa-chevron-up  { 
-            opacity: 0; 
-        }
-        &.is-open {
-        .fa-chevron-down { opacity: 0; }
-        .fa-chevron-up   { opacity: 1; }
-        }
     }
+}
 
-  /* === Menu fermé : ne montrer que l’active, sans trait === */
+/* Bouton chevrons piloté par aria-expanded */
+.mediasort__btn[aria-expanded="false"] .fa-chevron-down { opacity: 1; }
+.mediasort__btn[aria-expanded="false"] .fa-chevron-up   { opacity: 0; }
+.mediasort__btn[aria-expanded="true"]  .fa-chevron-down { opacity: 0; }
+.mediasort__btn[aria-expanded="true"]  .fa-chevron-up   { opacity: 1; }
+
+
+.sort {
+    display: flex;
+    flex-direction: column;
+    position: absolute;   // ← indispensable pour chevaucher
+    top: 0;               // aligne en haut de .mediasort
+    left: 96px;          // aligne sur ton bouton actuel
+    z-index: 50;
+    font-size: 18px; 
+    line-height: 69px;
+    padding-left: 0px;
+    margin: 0;
+
+      /* === Menu fermé : ne montrer que l’active, sans trait === */
+      
     &:not(.is-open) {
         .sort__option { 
             display: none; 
@@ -180,11 +191,10 @@ body {
             border-radius: 5px;
         }
         .sort__option::after { 
-            content: none  
+            content: ""; 
         }
     }
-
-  /* === Menu ouvert : tout afficher + traits === */
+      /* === Menu ouvert : tout afficher + traits === */
     &.is-open {
         .sort__option {
             display: block;
@@ -221,37 +231,22 @@ body {
             content: none;
         }
     }
-}
-
-.sort {
-    position: absolute;   // ← indispensable pour chevaucher
-    top: 0;               // aligne en haut de .mediasort
-    left: 96px;          // aligne sur ton bouton actuel
-    z-index: 50;
-    font-size: 18px; 
-    line-height: 69px;
-    padding-left: 0px;
-    margin: 0;
     &__option {
         position: relative; 
-        cursor: pointer;
         background-color: #901C1C; 
         color: white;
         box-shadow: 0 4px 4px rgba(0,0,0,0.25);
         width: 170px; 
         height: 69px; 
-        border-radius: 0;
-        text-indent: 20px;
+        font-size: 18px; 
+        line-height: 69px;
+        border-radius: 20px;
+        border: none;
+        text-align: left;
+        padding : 0px 0px 0px 20px;
     }
 }
 
-/* État initial si besoin */
-.sort__popularity {
-    display: block;
-}
-.sort__date, .sort__title { 
-    display: none; 
-}
 
 //*****************************
 // Design de la fenetre modale

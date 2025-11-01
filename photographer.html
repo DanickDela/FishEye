@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <header>
+    <header id="header" class="header-photographer">
       <a href="./index.html" aria-label="lien vers la page d'accueil">
       <img  src="assets/images/logo.png" class="logo" alt="Logo de la société Fisheye">
       </a>
@@ -21,19 +21,19 @@
     <main id="main-wrapper" class="main-container">
       <section class="photograph-display"></section>
   
-      <nav class="mediasort">
-          <h2 class="mediasort__title">Trier par :</h2>
+      <section class="mediasort" aria-labelledby="sortTitle">
+          <h2 id="sortTitle" class="mediasort__title">Trier par :</h2>
           <button class="mediasort__btn" id="dropdownBtn" aria-label="Déplier le menu de tri" aria-expanded="false">
-              <i class="fa-solid fa-chevron-down"></i>
-             <i class="fa-solid fa-chevron-up"></i>
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+             <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
           </button>
 
-          <ul class="sort" id="sortMenu" role="listbox">
-            <li role="option" class="sort__popularity sort__option" aria-selected="true">Popularité</li>
-            <li role="option" class="sort__date sort__option" aria-selected="true">Date</li>
-            <li role="option" class="sort__title sort__option" aria-selected="true">Titre</li>
-          </ul>
-        </nav> 
+          <div class="sort" id="sortMenu" role="radiogroup">
+            <button role="radio" class="sort__popularity sort__option" aria-checked="true">Popularité</button>
+            <button role="radio" class="sort__date sort__option" aria-checked="false">Date</button>
+            <button role="radio" class="sort__title sort__option" aria-checked="false">Titre</button>
+          </div>
+        </section> 
 
       <!-- Affiche tous les médias d'un photographe -->
       <section class="media-photographer"></section>
@@ -100,10 +100,10 @@
             <path d="M42 4.23L37.77 0L21 16.77L4.23 0L0 4.23L16.77 21L0 37.77L4.23 42L21 25.23L37.77 42L42 37.77L25.23 21L42 4.23Z" fill="currentColor"/>
           </svg>
         </button>
-        <div class="light-content"> 
+        <div id="lightcontent"  class="light-content"  role="region"  aria-label="Galerie d'images agrandie"> 
              <!-- Next/previous -->
-            <button type ="button" class="light-content-previous" aria-label="Média précédent">&#10094;</button>
-            <button type ="button" class="light-content-next" aria-label="Média suivant">&#10095;</button>
+            <button type ="button" class="light-content-previous" aria-label="Média précédent" aria-controls="lightcontent">&#10094;</button>
+            <button type ="button" class="light-content-next" aria-label="Média suivant" aria-controls="lightcontent">&#10095;</button>
         </div>
 		</div>
 

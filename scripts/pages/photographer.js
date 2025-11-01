@@ -6,6 +6,8 @@ import {lightBox} from '../utils/lightbox.js';
 import {sortBy} from '../utils/SortBy.js';
 import {displayLike} from '../utils/displayLikes.js';
 
+ window.lightboxOpen = false;
+ window.modalOpen = false;
 
 export const getPhotographer = async () => {
 
@@ -59,7 +61,7 @@ export const getPhotographer = async () => {
          const namePhotograph = photographerCard.name; 
          const photographName = document.querySelector(".modal__photographname");
          photographName.textContent =namePhotograph;
-         photographName.setAttribute ('aria-label', 'Nom du photographe: ${name}');
+         photographName.setAttribute ('aria-label', 'Nom du photographe');
 
         //Affichage du total de likes
         displayLike(medias);

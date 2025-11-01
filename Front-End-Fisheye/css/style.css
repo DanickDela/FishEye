@@ -1,0 +1,89 @@
+@charset "UTF-8";
+@import url("photographer.css");
+body {
+  font-family: "DM Sans", sans-serif;
+  margin: 0;
+  width: 100%;
+  max-width: 1440px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 90px;
+}
+
+h1 {
+  color: #901C1C;
+  margin-right: 100px;
+  margin-top: 44px;
+}
+
+.logo {
+  height: 50px;
+  margin-left: 100px;
+  margin-top: 42px;
+}
+
+.photographer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  gap: 70px;
+  margin-top: 112px;
+  margin-bottom: 120px;
+  margin-left: -31px;
+  margin-right: -31px;
+  overflow: hidden;
+}
+.photographer-card-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+.photographer-card__image {
+  height: 200px;
+  width: 200px;
+  -o-object-fit: cover;
+     object-fit: cover; /* remplit le cadre sans déformer */
+  -o-object-position: center;
+     object-position: center;
+  border-radius: 200px;
+  border: 2px solid green;
+}
+.photographer-card__name {
+  font-size: 36px;
+  font-weight: 400;
+  color: #D3573C;
+  text-align: center;
+  margin: 0px;
+  margin-top: 20px;
+}
+.photographer-card__info {
+  text-align: center;
+}
+.photographer-card__info .photographer-card__location {
+  color: #901C1C;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0px;
+}
+.photographer-card__info .photographer-card__tagline {
+  color: #000000;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 3px;
+}
+.photographer-card__info .photographer-card__price {
+  color: #757575;
+  font-size: 15px;
+  font-weight: 800;
+  margin: 3px;
+}

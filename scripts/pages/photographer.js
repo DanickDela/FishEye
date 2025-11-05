@@ -5,6 +5,7 @@ import {DefineMediaTemplate} from '../templates/MediaCard.js'
 import {lightBox} from '../utils/lightbox.js';
 import {sortBy} from '../utils/SortBy.js';
 import {displayLike} from '../utils/displayLikes.js';
+import {ModelFactory} from '../factory/photographFactory.js';
 
  window.lightboxOpen = false;
  window.modalOpen = false;

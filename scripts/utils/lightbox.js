@@ -10,6 +10,7 @@ export const lightBox = {
         const nextSlide=document.querySelector(".light-content-next");
         const closeBtnlightBox=document.querySelector(".lightbox__close");
         const displayLikeLight=document.querySelector(".display");
+        const modalOpen = document.getElementById("contact_modal");
         
 
         // Variable pour mémoriser le focus avant ouverture

@@ -1,7 +1,7 @@
 /**
  * Représente un média (image ou vidéo)
  */
-class MediaInfo {
+export class MediaInfo {
   /**
    * Crée une instance de MediaInfo.
    * 

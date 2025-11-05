@@ -14,7 +14,6 @@ export const sortBy = (medias) => {
     const sortPopularity = menu.querySelector(".sort__popularity");
     const sortDate = menu.querySelector(".sort__date");
     const sortTitle = menu.querySelector(".sort__title");
-    const mediaSort= document.querySelector('.mediasort');
     const arrowUpdown = document.querySelector('.mediasort__btn');
 
     // État initial : Popularité active et visible seule

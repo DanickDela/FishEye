@@ -1,3 +1,6 @@
+import { MediaInfo } from '../models/mediasM.js'; 
+import { PhotographerInfo } from '../models/photograpM.js';
+
 /**
  * Factory permettant de créer des instances de modèles
  * à partir de données brutes (JSON).
@@ -5,7 +8,7 @@
  * @namespace ModelFactory
  */
 
-const ModelFactory = {
+export const ModelFactory = {
   /**
    * Crée un modèle `PhotographerInfo` à partir de données brutes.
    *

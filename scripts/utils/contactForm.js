@@ -12,6 +12,7 @@ const Email = document.getElementById("email");
 const message = document.getElementById("message");
 const closecontactBtn = document.querySelector(".modalheader__close");
 const contactBtn = document.querySelector(".contact_button");
+const overlay = document.querySelector('.overlay');
 
 let lastFocus=null;
 
@@ -128,12 +129,14 @@ export const displayModal = () => {
     window.modalOpen = true;
 
     // Nettoyer les erreurs précédentes
-    clearAllErrors()
+    clearAllErrors();
+    document.body.classList.add('no-scroll');
+    //overlay pour assombrir l'arrière plan, modale au premier plan
+    overlay.classList.add('is-visible');
     Header.inert=true;
     mainContainer.inert=true;
     modal.style.display = 'block';
     modal.inert=false;
-    document.body.classList.add('no-scroll');
     closecontactBtn.focus();
 };
 
@@ -147,6 +150,8 @@ const closeModal = () => {
     Header.inert=false;
     mainContainer.inert=false;
     modal.inert=true;
+    //suppression del'overlay à la fermeture de la modale
+    overlay.classList.remove('is-visible');
     document.body.classList.remove('no-scroll');
     lastFocus.focus();
 };
@@ -231,6 +236,7 @@ form.addEventListener("submit", (event) => {
 // Close modal when espace key is pressed
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !modal.inert && !window.lightboxOpen && mainContainer.inert) {
+        contactBtn.style.pointerEvents = "none";
         closeModal();
   }
 });

@@ -9,6 +9,22 @@ body {
   margin-right: 100px;
 }
 
+.overlay {
+  position: fixed;
+  inset: 0px;
+  max-width: 1440px;
+  margin-right: auto;
+  margin-left: auto;
+  background: rgba(196, 196, 196, 0.4);
+  z-index: 3000; /* juste en dessous de la modale */
+  display: none; /* caché par défaut */
+}
+
+/* Quand la modale est ouverte */
+.overlay.is-visible {
+  display: block;
+}
+
 .photograph-header {
   display: flex;
   flex-direction: row;
@@ -35,7 +51,7 @@ body {
   justify-content: space-around;
   align-items: center;
   opacity: 1;
-  z-index: 2000;
+  z-index: 1500;
 }
 .photograph-header .display__like {
   display: flex;
@@ -253,7 +269,7 @@ body {
   margin: 69px auto;
   width: 669px;
   height: 900px;
-  z-index: 1000;
+  z-index: 4000;
 }
 
 .modal {

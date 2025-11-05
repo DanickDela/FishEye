@@ -1,7 +1,7 @@
 /**
  * Représente un photographe et ses informations principales.
  */
-class PhotographerInfo {
+export class PhotographerInfo {
     /**
      * Crée une instance de PhotographerInfo.
      *
